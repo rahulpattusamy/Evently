@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/shared/search-bar";
 import { EventCarousel } from "@/components/shared/event-carousel";
 import { HeroCollage } from "@/components/shared/hero-collage";
-import { VenueCard } from "@/components/shared/venue-card";
+import { VenueCarousel } from "@/components/shared/venue-carousel";
 import { VenueSpotlight } from "@/components/shared/venue-spotlight";
 import { ServiceCategoryCard } from "@/components/shared/service-category-card";
 import { featuredEventTypes, getEventTypeBySlug } from "@/lib/data/event-types";
@@ -30,27 +30,6 @@ const HERO_STACK = [
   getEventTypeBySlug("birthdays"),
   getEventTypeBySlug("conferences"),
 ].filter((e): e is NonNullable<typeof e> => !!e);
-
-function imagesOf(...slugs: string[]) {
-  return slugs
-    .map((slug) => getEventTypeBySlug(slug)?.image)
-    .filter((img): img is string => !!img);
-}
-
-const HERO_COLLAGE_POOL = imagesOf(
-  "weddings",
-  "conferences",
-  "birthdays",
-  "engagements",
-  "office-parties",
-  "college-cultural-events",
-  "anniversaries",
-  "product-launches",
-  "cultural-celebrations",
-  "housewarming",
-  "award-ceremonies",
-  "baby-showers"
-);
 
 const HOW_IT_WORKS = [
   {
@@ -110,11 +89,11 @@ export default function Home() {
               </div>
             </div>
 
-            <HeroCollage pool={HERO_COLLAGE_POOL} />
+            <HeroCollage />
           </div>
 
-          {/* Search card overlaps into the next section */}
-          <div className="relative z-10 mx-auto mt-10 max-w-4xl pb-10 sm:pb-14">
+          {/* Search card overlaps into the next section; once it scrolls under the navbar, the navbar swaps to a compact search bar */}
+          <div id="hero-search-bar" className="relative z-10 mx-auto mt-10 max-w-4xl pb-10 sm:pb-14">
             <SearchBar />
           </div>
         </div>
@@ -168,11 +147,7 @@ export default function Home() {
             </div>
           )}
 
-          <div className="mt-6 flex gap-5 overflow-x-auto pb-2">
-            {STRIP_VENUES.map((venue) => (
-              <VenueCard key={venue.id} venue={venue} className="w-[19rem] shrink-0" />
-            ))}
-          </div>
+          <VenueCarousel venues={STRIP_VENUES} />
 
           <Button
             asChild

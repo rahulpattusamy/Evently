@@ -23,7 +23,13 @@ const EVENT_OPTIONS = [
   { value: "private-parties", label: "Private Party" },
 ];
 
-export function SearchBar() {
+export function SearchBar({
+  compact = false,
+  onExpand,
+}: {
+  compact?: boolean;
+  onExpand?: () => void;
+}) {
   const router = useRouter();
   const [eventType, setEventType] = useState<string>("");
   const [city, setCity] = useState<string>("");
@@ -37,6 +43,22 @@ export function SearchBar() {
     if (date) params.set("date", date);
     if (guests) params.set("guests", guests);
     router.push(`/services?${params.toString()}`);
+  }
+
+  if (compact) {
+    return (
+      <button
+        onClick={onExpand}
+        className="flex w-full items-center gap-3 rounded-full border border-border bg-white px-4 py-2.5 shadow-md shadow-charcoal/5 transition-shadow hover:shadow-lg"
+      >
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-rose text-white">
+          <Search className="h-3.5 w-3.5" />
+        </span>
+        <span className="truncate text-sm font-medium text-muted-foreground">
+          Search venues, vendors &amp; events&hellip;
+        </span>
+      </button>
+    );
   }
 
   return (

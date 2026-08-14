@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Sparkles, AtSign, MessageCircle, Globe } from "lucide-react";
+import {  AtSign, MessageCircle, Globe } from "lucide-react";
 import { cities } from "@/lib/data/cities";
 
 const CATEGORY_LINKS = [
@@ -25,7 +25,6 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-rose" />
               <span className="font-heading text-lg font-bold text-rose">
                 Evently
               </span>

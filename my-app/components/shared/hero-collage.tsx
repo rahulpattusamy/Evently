@@ -1,37 +1,37 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 const FRAMES = [
-  "absolute left-0 top-4 h-56 w-44 -rotate-6 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
-  "absolute right-0 top-0 h-52 w-40 rotate-3 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
-  "absolute bottom-0 left-1/4 h-44 w-36 rotate-2 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
+  {
+    className:
+      "absolute left-0 top-4 h-72 w-56 -rotate-6 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
+    src: "https://i.pinimg.com/736x/bb/b0/cd/bbb0cdfdf1548eb0a5ee16dcd79f52c0.jpg",
+    alt: "Wedding ceremony",
+  },
+  {
+    className:
+      "absolute right-0 top-0 h-64 w-52 rotate-3 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
+    src: "https://i.pinimg.com/736x/f2/72/41/f2724122e0b52c33a3972024ce5b58ae.jpg",
+    alt: "Birthday party",
+  },
+  {
+    className:
+      "absolute bottom-0 left-1/4 h-56 w-48 rotate-2 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
+    src: "https://i.pinimg.com/736x/a4/88/7c/a4887cb3a2d3954843211e38c7fa3a0b.jpg",
+    alt: "Office event",
+  },
 ];
 
-export function HeroCollage({ pool }: { pool: string[] }) {
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    if (pool.length <= FRAMES.length) return;
-    const id = setInterval(() => {
-      setOffset((o) => (o + 1) % pool.length);
-    }, 1800);
-    return () => clearInterval(id);
-  }, [pool.length]);
-
+export function HeroCollage() {
   return (
-    <div className="relative mx-auto hidden h-80 w-full max-w-sm lg:block">
-      {FRAMES.map((frameClass, i) => (
-        <div key={i} className={frameClass}>
+    <div className="relative mx-auto hidden h-[26rem] w-full max-w-md lg:block">
+      {FRAMES.map((frame) => (
+        <div key={frame.src} className={frame.className}>
           <Image
-            key={(offset + i) % pool.length}
-            src={pool[(offset + i) % pool.length]}
-            alt="Event inspiration"
+            src={frame.src}
+            alt={frame.alt}
             fill
             sizes="176px"
-            priority={i === 0 && offset === 0}
-            className="animate-in fade-in object-cover duration-700"
+            className="object-cover"
           />
         </div>
       ))}

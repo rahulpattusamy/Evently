@@ -1,40 +1,42 @@
-"use client";
-
-import { useRef } from "react";
-import Autoplay from "embla-carousel-autoplay";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
 import { EventCard } from "@/components/shared/event-card";
 import { EventType } from "@/lib/types";
 
-export function EventCarousel({ events }: { events: EventType[] }) {
-  const autoplay = useRef(
-    Autoplay({ delay: 700, stopOnInteraction: false, stopOnMouseEnter: true })
-  );
+function splitRows(events: EventType[]) {
+  const rowA: EventType[] = [];
+  const rowB: EventType[] = [];
+  events.forEach((event, i) => (i % 2 === 0 ? rowA : rowB).push(event));
+  return [rowA, rowB];
+}
+
+function MarqueeRow({ events, direction }: { events: EventType[]; direction: "left" | "right" }) {
+  if (events.length === 0) return null;
 
   return (
-    <Carousel
-      opts={{ align: "start", loop: true, duration: 8 }}
-      plugins={[autoplay.current]}
-      className="mt-6"
-    >
-      <CarouselContent className="-ml-6">
-        {events.map((event) => (
-          <CarouselItem
-            key={event.slug}
-            className="basis-[15rem] pl-6 sm:basis-1/3 lg:basis-1/5"
-          >
-            <EventCard event={event} className="w-full" />
-          </CarouselItem>
+    <div className="marquee-row overflow-hidden">
+      <div
+        className={`flex w-max gap-5 ${
+          direction === "left" ? "animate-marquee-left" : "animate-marquee-right"
+        }`}
+      >
+        {[events, events].map((set, setIndex) => (
+          <div key={setIndex} className="flex gap-5" aria-hidden={setIndex === 1}>
+            {set.map((event) => (
+              <EventCard key={`${setIndex}-${event.slug}`} event={event} className="w-56 shrink-0 sm:w-64" />
+            ))}
+          </div>
         ))}
-      </CarouselContent>
-      <CarouselPrevious className="hidden sm:flex" />
-      <CarouselNext className="hidden sm:flex" />
-    </Carousel>
+      </div>
+    </div>
+  );
+}
+
+export function EventCarousel({ events }: { events: EventType[] }) {
+  const [rowA, rowB] = splitRows(events);
+
+  return (
+    <div className="mt-6 flex flex-col gap-5">
+      <MarqueeRow events={rowA} direction="left" />
+      <MarqueeRow events={rowB} direction="right" />
+    </div>
   );
 }
