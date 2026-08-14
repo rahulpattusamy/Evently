@@ -92,8 +92,8 @@ export default function Home() {
             <HeroCollage />
           </div>
 
-          {/* Search card overlaps into the next section; once it scrolls under the navbar, the navbar swaps to a compact search bar */}
-          <div id="hero-search-bar" className="relative z-10 mx-auto mt-10 max-w-4xl pb-10 sm:pb-14">
+          {/* Search card overlaps into the next section */}
+          <div className="relative z-10 mx-auto mt-10 max-w-4xl pb-10 sm:pb-14">
             <SearchBar />
           </div>
         </div>
