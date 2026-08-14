@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AuthShowcase } from "@/components/auth/auth-showcase";
+import { Logo } from "@/components/shared/logo";
 import { AuthModeTabs } from "@/components/auth/mode-tabs";
 import { PasswordInput } from "@/components/auth/password-input";
 
@@ -44,11 +45,8 @@ export default function LoginPage() {
       <AuthShowcase />
 
       <div className="scrollbar-hide relative flex items-center justify-center overflow-y-auto px-4 py-10 sm:px-8">
-        <a
-          href="/"
-          className="absolute left-4 top-4 font-heading text-lg font-bold text-rose sm:left-8 sm:top-8 lg:hidden"
-        >
-          Evently
+        <a href="/" className="absolute left-4 top-4 sm:left-8 sm:top-8 lg:hidden">
+          <Logo className="h-14" variant="glow" />
         </a>
         <div className="w-full max-w-sm animate-auth-fade-up">
           <AuthModeTabs />

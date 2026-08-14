@@ -21,7 +21,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     <>
       <Navbar />
       <main className="flex-1 pb-16 md:pb-0">{children}</main>
-      <Footer />
+      {pathname === "/" && <Footer />}
       <MobileBottomNav />
     </>
   );

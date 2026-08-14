@@ -45,7 +45,7 @@ export function EventGroupNav({ groups }: { groups: GroupNavItem[] }) {
   }, [groups]);
 
   return (
-    <div className="sticky top-16 z-30 -mx-4 border-b border-border bg-warm-white/95 px-4 backdrop-blur-sm sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+    <div className="sticky top-24 z-30 -mx-4 border-b border-border bg-warm-white/95 px-4 backdrop-blur-sm sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto py-3">
         {groups.map((g) => (
           <a

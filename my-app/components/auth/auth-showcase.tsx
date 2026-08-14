@@ -13,6 +13,7 @@ import {
   Lock,
   Users,
 } from "lucide-react";
+import { Logo } from "@/components/shared/logo";
 
 const COL_A = [
   "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
@@ -111,11 +112,8 @@ export function AuthShowcase() {
         {/* header */}
         <div className="flex items-start justify-between gap-4">
           <div>
-            <Link href="/" className="flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-rose to-burgundy font-heading text-lg font-bold text-white">
-                E
-              </span>
-              <span className="font-heading text-2xl font-bold text-charcoal">Evently</span>
+            <Link href="/" className="flex items-center">
+              <Logo className="h-24" />
             </Link>
             <p className="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-charcoal/70">
               <Sparkles className="h-3.5 w-3.5 text-rose" />

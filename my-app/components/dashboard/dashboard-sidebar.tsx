@@ -21,7 +21,7 @@ export function DashboardSidebar({ title, items }: DashboardSidebarProps) {
 
   return (
     <aside className="hidden w-60 shrink-0 lg:block">
-      <div className="sticky top-20 rounded-2xl border border-border bg-white p-3">
+      <div className="sticky top-28 rounded-2xl border border-border bg-white p-3">
         <p className="px-3 pt-2 pb-3 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
           {title}
         </p>

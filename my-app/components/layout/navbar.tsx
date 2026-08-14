@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, Search, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/shared/logo";
 import {
   Sheet,
   SheetContent,
@@ -25,11 +26,9 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-white">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-heading text-xl font-bold text-rose">
-            Evently
-          </span>
+      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="flex items-center">
+          <Logo className="h-12" priority />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
@@ -74,8 +73,8 @@ export function Navbar() {
           </SheetTrigger>
           <SheetContent side="right" className="w-72">
             <SheetHeader>
-              <SheetTitle className="text-left font-heading text-rose">
-                Evently
+              <SheetTitle className="text-left">
+                <Logo className="h-12" />
               </SheetTitle>
             </SheetHeader>
             <nav className="flex flex-col gap-1 px-4">

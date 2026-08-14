@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Logo } from "@/components/shared/logo";
 import {
   InstagramIcon,
   FacebookIcon,
@@ -123,10 +124,8 @@ export function Footer() {
         {/* Link grid */}
         <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-6">
           <div className="col-span-2 md:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2">
-              <span className="font-heading text-xl font-bold tracking-tight text-charcoal">
-                Evently
-              </span>
+            <Link href="/" className="inline-flex items-center">
+              <Logo className="h-28" variant="glow" />
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Everything you need for your perfect event — discovered,

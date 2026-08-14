@@ -128,7 +128,7 @@ export default async function VenueDetailPage({ params }: PageProps<"/venues/[id
         </div>
 
         <aside className="w-full shrink-0 lg:w-80">
-          <div className="sticky top-24 space-y-4 rounded-2xl border border-border bg-white p-5">
+          <div className="sticky top-32 space-y-4 rounded-2xl border border-border bg-white p-5">
             <PriceDisplay amount={venue.startingPrice} prefix="Starting from" amountClassName="text-2xl" />
             <p className="text-xs text-muted-foreground">
               Final pricing depends on date, guest count and add-on services.

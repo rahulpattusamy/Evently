@@ -159,7 +159,7 @@ export function ServiceFiltersDesktop({ hideCategory }: { hideCategory?: boolean
 
   return (
     <aside className="hidden w-64 shrink-0 lg:block">
-      <div className="sticky top-24 space-y-4 rounded-2xl border border-border bg-white p-5">
+      <div className="sticky top-32 space-y-4 rounded-2xl border border-border bg-white p-5">
         <div className="flex items-center justify-between">
           <h3 className="flex items-center gap-1.5 font-heading text-sm font-bold text-charcoal">
             <Filter className="h-4 w-4" /> Filters
