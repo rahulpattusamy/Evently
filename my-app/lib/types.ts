@@ -154,3 +154,93 @@ export interface Review {
   comment: string;
   eventType?: EventTypeSlug;
 }
+
+export type UserRole = "customer" | "vendor" | "admin";
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: UserRole;
+  avatar: string;
+  city: CitySlug;
+  joinedDate: string;
+  vendorId?: string;
+}
+
+export interface EventRequirement {
+  label: string;
+  category: string;
+  done: boolean;
+}
+
+export interface UserEvent {
+  id: string;
+  userId: string;
+  title: string;
+  eventType: EventTypeSlug;
+  date: string;
+  citySlug: CitySlug;
+  guests: number;
+  budget: number;
+  progress: number;
+  requirements: EventRequirement[];
+  coverImage: string;
+}
+
+export type BookingStatus =
+  | "pending"
+  | "confirmed"
+  | "completed"
+  | "cancelled";
+
+export interface Booking {
+  id: string;
+  userId: string;
+  eventId?: string;
+  targetType: "venue" | "vendor";
+  targetId: string;
+  targetName: string;
+  targetImage: string;
+  packageName: string;
+  amount: number;
+  amountPaid: number;
+  status: BookingStatus;
+  eventDate: string;
+  eventTime: string;
+  guests: number;
+  citySlug: CitySlug;
+  createdAt: string;
+}
+
+export type QuoteStatus = "pending" | "quoted" | "accepted" | "declined";
+
+export interface QuoteRequest {
+  id: string;
+  userId: string;
+  userName: string;
+  userPhone: string;
+  userEmail: string;
+  targetType: "venue" | "vendor";
+  targetId: string;
+  targetName: string;
+  eventType: EventTypeSlug;
+  eventDate: string;
+  citySlug: CitySlug;
+  guests: number;
+  budget: number;
+  requiredServices: string[];
+  requirements?: string;
+  status: QuoteStatus;
+  quotedAmount?: number;
+  createdAt: string;
+}
+
+export interface WishlistItem {
+  id: string;
+  userId: string;
+  targetType: "venue" | "vendor";
+  targetId: string;
+  addedAt: string;
+}

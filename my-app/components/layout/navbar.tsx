@@ -56,13 +56,13 @@ export function Navbar() {
             </Link>
           </Button>
           <Button variant="ghost" className="text-charcoal" asChild>
-            <Link href="/dashboard">Login</Link>
+            <Link href="/login">Login</Link>
           </Button>
           <Button variant="outline" className="border-rose text-rose hover:bg-blush hover:text-burgundy" asChild>
-            <Link href="/dashboard">Sign Up</Link>
+            <Link href="/signup">Sign Up</Link>
           </Button>
           <Button className="bg-rose text-white hover:bg-burgundy" asChild>
-            <Link href="/vendor/dashboard">Become a Vendor</Link>
+            <Link href="/signup?role=vendor">Become a Vendor</Link>
           </Button>
         </div>
 
@@ -98,14 +98,21 @@ export function Navbar() {
                 Wishlist
               </Link>
               <Link
-                href="/dashboard"
+                href="/login"
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-blush hover:text-burgundy"
               >
                 Login
               </Link>
+              <Link
+                href="/signup"
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-blush hover:text-burgundy"
+              >
+                Sign Up
+              </Link>
               <Button className="mt-3 bg-rose text-white hover:bg-burgundy" asChild>
-                <Link href="/vendor/dashboard" onClick={() => setOpen(false)}>
+                <Link href="/signup?role=vendor" onClick={() => setOpen(false)}>
                   Become a Vendor
                 </Link>
               </Button>

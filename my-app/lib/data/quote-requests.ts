@@ -1,0 +1,88 @@
+import { QuoteRequest } from "@/lib/types";
+
+export const quoteRequests: QuoteRequest[] = [
+  {
+    id: "quote-1",
+    userId: "user-1",
+    userName: "Arun Kumar",
+    userPhone: "9840012345",
+    userEmail: "arun.kumar@example.com",
+    targetType: "vendor",
+    targetId: "vendor-1",
+    targetName: "Momentum Event Planners",
+    eventType: "birthdays",
+    eventDate: "2026-10-20",
+    citySlug: "chennai",
+    guests: 150,
+    budget: 80000,
+    requiredServices: ["Decoration", "Anchor / Host"],
+    requirements: "Looking for a themed birthday setup with a live DJ.",
+    status: "quoted",
+    quotedAmount: 72000,
+    createdAt: "2026-08-01",
+  },
+  {
+    id: "quote-2",
+    userId: "user-1",
+    userName: "Arun Kumar",
+    userPhone: "9840012345",
+    userEmail: "arun.kumar@example.com",
+    targetType: "vendor",
+    targetId: "vendor-4",
+    targetName: "Inkwell Invitation Studio",
+    eventType: "weddings",
+    eventDate: "2027-01-18",
+    citySlug: "chennai",
+    guests: 600,
+    budget: 40000,
+    requiredServices: ["Digital Invites", "RSVP Websites"],
+    status: "pending",
+    createdAt: "2026-08-10",
+  },
+  {
+    id: "quote-3",
+    userId: "user-4",
+    userName: "Priyanka Reddy",
+    userPhone: "9900112233",
+    userEmail: "priyanka.r@example.com",
+    targetType: "vendor",
+    targetId: "vendor-1",
+    targetName: "Momentum Event Planners",
+    eventType: "birthdays",
+    eventDate: "2026-10-15",
+    citySlug: "chennai",
+    guests: 150,
+    budget: 80000,
+    requiredServices: ["Full Planning", "Vendor Coordination"],
+    requirements: "Need end-to-end planning for a milestone birthday party.",
+    status: "pending",
+    createdAt: "2026-08-12",
+  },
+  {
+    id: "quote-4",
+    userId: "user-5",
+    userName: "Suresh Babu",
+    userPhone: "9789123456",
+    userEmail: "suresh.b@example.com",
+    targetType: "vendor",
+    targetId: "vendor-1",
+    targetName: "Momentum Event Planners",
+    eventType: "corporate-meetings",
+    eventDate: "2026-09-28",
+    citySlug: "chennai",
+    guests: 60,
+    budget: 150000,
+    requiredServices: ["Corporate Events", "On-site Management"],
+    status: "accepted",
+    quotedAmount: 140000,
+    createdAt: "2026-07-20",
+  },
+];
+
+export function getQuotesByUser(userId: string) {
+  return quoteRequests.filter((q) => q.userId === userId);
+}
+
+export function getQuotesForVendor(vendorId: string) {
+  return quoteRequests.filter((q) => q.targetId === vendorId && q.targetType === "vendor");
+}

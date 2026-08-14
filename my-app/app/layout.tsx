@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Work_Sans } from "next/font/google";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
+import { SiteChrome } from "@/components/layout/site-chrome";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const bodyFont = Work_Sans({
@@ -30,10 +29,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${bodyFont.variable} ${headingFont.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-warm-white">
-        <Navbar />
-        <main className="flex-1 pb-16 md:pb-0">{children}</main>
-        <Footer />
-        <MobileBottomNav />
+        <SiteChrome>{children}</SiteChrome>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            classNames: {
+              toast: "!bg-white !border-border !text-charcoal",
+              actionButton: "!bg-rose",
+            },
+          }}
+        />
       </body>
     </html>
   );

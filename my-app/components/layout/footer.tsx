@@ -166,7 +166,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-charcoal/80">
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 shrink-0 text-rose" strokeWidth={1.75} />
-                hello@evently.in
+                hello@Evently.in
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 shrink-0 text-rose" strokeWidth={1.75} />

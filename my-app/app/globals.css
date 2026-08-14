@@ -49,7 +49,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* EventSphere brand tokens */
+  /* Evently brand tokens */
   --color-rose: var(--rose);
   --color-burgundy: var(--burgundy);
   --color-blush: var(--blush);
@@ -60,7 +60,7 @@
 }
 
 :root {
-  /* EventSphere palette — Myntra-inspired */
+  /* Evently palette — Myntra-inspired */
   --rose: #ff3f6c;
   --burgundy: #e1235b;
   --blush: #fff0f4;
@@ -244,4 +244,40 @@
 
 .animate-spin-slow {
   animation: spin-slow 30s linear infinite;
+}
+
+@keyframes marquee-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@keyframes marquee-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+
+.animate-marquee-up {
+  animation: marquee-up 32s linear infinite;
+}
+
+.animate-marquee-down {
+  animation: marquee-down 26s linear infinite;
+}
+
+@keyframes auth-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-auth-fade-up {
+  animation: auth-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0) rotate(var(--float-rot, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--float-rot, 0deg)); }
+}
+
+.animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
 }

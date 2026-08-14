@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { cities } from "@/lib/data/cities";
+import { SearchAutocomplete } from "@/components/search/search-autocomplete";
 
 const EVENT_OPTIONS = [
   { value: "weddings", label: "Wedding" },
@@ -29,6 +30,7 @@ export function SearchBar() {
   const [city, setCity] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [guests, setGuests] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
 
   function handleSearch() {
     const params = new URLSearchParams();
@@ -39,8 +41,22 @@ export function SearchBar() {
     router.push(`/services?${params.toString()}`);
   }
 
+  function handleQuerySubmit(value: string) {
+    const params = new URLSearchParams();
+    if (value) params.set("q", value);
+    router.push(`/search?${params.toString()}`);
+  }
+
   return (
     <div className="w-full rounded-2xl border border-border bg-white p-3 shadow-lg shadow-charcoal/5 sm:p-4">
+      <div className="mb-3">
+        <SearchAutocomplete
+          value={query}
+          onChange={setQuery}
+          onSubmit={handleQuerySubmit}
+          placeholder='Try "wedding halls in Chennai" or "photographers under ₹50,000"'
+        />
+      </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:items-end lg:gap-2">
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-medium text-muted-foreground">Event</label>
