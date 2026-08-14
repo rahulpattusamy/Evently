@@ -188,3 +188,60 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes blob-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(6%, 8%) scale(1.15); }
+  66% { transform: translate(-4%, 4%) scale(0.95); }
+}
+
+@keyframes blob-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-8%, -6%) scale(1.1); }
+  66% { transform: translate(5%, -3%) scale(0.9); }
+}
+
+@keyframes shimmer-line {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-blob-a {
+  animation: blob-drift-a 16s ease-in-out infinite;
+}
+
+.animate-blob-b {
+  animation: blob-drift-b 20s ease-in-out infinite;
+}
+
+.animate-shimmer-line {
+  background-size: 200% 100%;
+  animation: shimmer-line 6s linear infinite;
+}
+
+@keyframes blob-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-3%, 10%) scale(1.2); }
+}
+
+.animate-blob-c {
+  animation: blob-drift-c 24s ease-in-out infinite;
+}
+
+@keyframes pan-grid {
+  from { background-position: 0 0; }
+  to { background-position: 48px 48px; }
+}
+
+.animate-pan-grid {
+  animation: pan-grid 12s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
