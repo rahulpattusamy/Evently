@@ -125,7 +125,7 @@ export function Footer() {
         <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-6">
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="inline-flex items-center">
-              <Logo className="h-28" variant="glow" />
+              <Logo className="h-28" variant="default" />
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Everything you need for your perfect event — discovered,

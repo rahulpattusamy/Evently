@@ -112,8 +112,8 @@ export function AuthShowcase() {
         {/* header */}
         <div className="flex items-start justify-between gap-4">
           <div>
-            <Link href="/" className="flex items-center">
-              <Logo className="h-24" />
+            <Link href="/" className="-ml-3 -mt-4 flex items-center">
+              <Logo className="h-16" />
             </Link>
             <p className="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-charcoal/70">
               <Sparkles className="h-3.5 w-3.5 text-rose" />

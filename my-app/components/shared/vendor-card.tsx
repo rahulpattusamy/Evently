@@ -13,7 +13,9 @@ import { getCategoryBySlug } from "@/lib/data/categories";
 import { getCityBySlug } from "@/lib/data/cities";
 import { cn } from "@/lib/utils";
 
-export function VendorCard({ vendor, className }: { vendor: Vendor; className?: string }) {
+import { Zap } from "lucide-react";
+
+export function VendorCard({ vendor, className, isSponsored }: { vendor: Vendor; className?: string; isSponsored?: boolean }) {
   const [saved, setSaved] = useState(false);
   const category = getCategoryBySlug(vendor.categorySlug);
   const city = getCityBySlug(vendor.citySlug);
@@ -22,6 +24,7 @@ export function VendorCard({ vendor, className }: { vendor: Vendor; className?: 
     <div
       className={cn(
         "group overflow-hidden rounded-2xl border border-border bg-white transition-shadow hover:shadow-lg hover:shadow-charcoal/5",
+        isSponsored && "border-rose/50 ring-1 ring-rose/10 shadow-md",
         className
       )}
     >
@@ -36,11 +39,17 @@ export function VendorCard({ vendor, className }: { vendor: Vendor; className?: 
         <button
           onClick={() => setSaved((s) => !s)}
           aria-label="Save to wishlist"
-          className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm"
+          className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm"
         >
           <Heart className={cn("h-4 w-4", saved ? "fill-rose text-rose" : "text-charcoal")} />
         </button>
-        {vendor.premium && <PremiumBadge className="absolute left-3 top-3 bg-white/90" />}
+        {isSponsored ? (
+          <span className="absolute left-3 top-3 z-10 rounded bg-rose px-1.5 py-0.5 text-[9px] font-bold text-white uppercase tracking-wide flex items-center gap-1 shadow-sm">
+            <Zap className="h-2 w-2 fill-current animate-pulse" /> Sponsored
+          </span>
+        ) : vendor.premium ? (
+          <PremiumBadge className="absolute left-3 top-3 bg-white/90" />
+        ) : null}
       </div>
 
       <div className="space-y-2.5 p-4">

@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, Search, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
+import { toast } from "sonner";
+import { EventHubDropdown } from "@/components/layout/event-hub-dropdown";
 import {
   Sheet,
   SheetContent,
@@ -23,6 +25,24 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setUserRole(localStorage.getItem("userRole"));
+  }, []);
+
+  function handleLogOut() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userRole");
+    setIsLoggedIn(false);
+    setUserRole(null);
+    toast.success("Successfully logged out!");
+    window.location.href = "/";
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-white">
@@ -54,15 +74,31 @@ export function Navbar() {
               <Heart className="h-5 w-5 text-charcoal" />
             </Link>
           </Button>
-          <Button variant="ghost" className="text-charcoal" asChild>
-            <Link href="/login">Login</Link>
-          </Button>
-          <Button variant="outline" className="border-rose text-rose hover:bg-blush hover:text-burgundy" asChild>
-            <Link href="/signup">Sign Up</Link>
-          </Button>
-          <Button className="bg-rose text-white hover:bg-burgundy" asChild>
-            <Link href="/signup?role=vendor">Become a Vendor</Link>
-          </Button>
+          <EventHubDropdown />
+          {isLoggedIn ? (
+            <>
+              <Button variant="ghost" className="text-charcoal font-semibold" asChild>
+                <Link href={userRole === "vendor" ? "/vendor/dashboard" : "/"}>
+                  {userRole === "vendor" ? "Vendor Dashboard" : "Home"}
+                </Link>
+              </Button>
+              <Button variant="outline" className="border-rose text-rose hover:bg-blush hover:text-burgundy rounded-full h-10" onClick={handleLogOut}>
+                Log Out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="ghost" className="text-charcoal" asChild>
+                <Link href="/login">Login</Link>
+              </Button>
+              <Button variant="outline" className="border-rose text-rose hover:bg-blush hover:text-burgundy" asChild>
+                <Link href="/signup">Sign Up</Link>
+              </Button>
+              <Button className="bg-rose text-white hover:bg-burgundy" asChild>
+                <Link href="/signup?role=vendor">Become a Vendor</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         <Sheet open={open} onOpenChange={setOpen}>
@@ -89,6 +125,9 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="my-2 border-t border-border" />
+              <div className="py-1 px-3">
+                <EventHubDropdown />
+              </div>
               <Link
                 href="/wishlist"
                 onClick={() => setOpen(false)}
@@ -96,25 +135,48 @@ export function Navbar() {
               >
                 Wishlist
               </Link>
-              <Link
-                href="/login"
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-blush hover:text-burgundy"
-              >
-                Login
-              </Link>
-              <Link
-                href="/signup"
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-blush hover:text-burgundy"
-              >
-                Sign Up
-              </Link>
-              <Button className="mt-3 bg-rose text-white hover:bg-burgundy" asChild>
-                <Link href="/signup?role=vendor" onClick={() => setOpen(false)}>
-                  Become a Vendor
-                </Link>
-              </Button>
+              {isLoggedIn ? (
+                <>
+                  <Link
+                    href={userRole === "vendor" ? "/vendor/dashboard" : "/"}
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-charcoal hover:bg-blush hover:text-burgundy"
+                  >
+                    {userRole === "vendor" ? "Vendor Dashboard" : "Home"}
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setOpen(false);
+                      handleLogOut();
+                    }}
+                    className="w-full text-left rounded-lg px-3 py-2.5 text-sm font-semibold text-rose hover:bg-rose/5"
+                  >
+                    Log Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-blush hover:text-burgundy"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/signup"
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-blush hover:text-burgundy"
+                  >
+                    Sign Up
+                  </Link>
+                  <Button className="mt-3 bg-rose text-white hover:bg-burgundy" asChild>
+                    <Link href="/signup?role=vendor" onClick={() => setOpen(false)}>
+                      Become a Vendor
+                    </Link>
+                  </Button>
+                </>
+              )}
             </nav>
           </SheetContent>
         </Sheet>

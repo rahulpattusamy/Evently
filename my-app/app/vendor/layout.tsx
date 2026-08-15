@@ -12,6 +12,7 @@ import {
   Star,
   Wallet,
   Settings,
+  TrendingUp,
 } from "lucide-react";
 import {
   DashboardSidebar,
@@ -30,6 +31,7 @@ const VENDOR_NAV_ITEMS: SidebarNavItem[] = [
   { label: "Reviews", href: "/vendor/reviews", icon: Star },
   { label: "Payments", href: "/vendor/payments", icon: Wallet },
   { label: "Analytics", href: "/vendor/analytics", icon: BarChart3 },
+  { label: "Grow Business", href: "/vendor/grow", icon: TrendingUp },
   { label: "Settings", href: "/vendor/settings", icon: Settings },
 ];
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,11 +31,23 @@ export default function LoginPage() {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
-  function onSubmit() {
+  function onSubmit(values: FormValues) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        toast.success("Welcome back to Evently!");
-        router.push("/dashboard");
+        localStorage.setItem("isLoggedIn", "true");
+        if (values.email === "vendor@evently.com") {
+          localStorage.setItem("userRole", "vendor");
+          toast.success("Welcome back, Vendor partner!");
+          router.push("/vendor/dashboard");
+        } else if (values.email === "planner@evently.com") {
+          localStorage.setItem("userRole", "planner");
+          toast.success("Welcome back, Planner!");
+          router.push("/");
+        } else {
+          localStorage.setItem("userRole", "planner");
+          toast.success("Welcome back to Evently!");
+          router.push("/");
+        }
         resolve(true);
       }, 700);
     });
@@ -45,9 +58,9 @@ export default function LoginPage() {
       <AuthShowcase />
 
       <div className="scrollbar-hide relative flex items-center justify-center overflow-y-auto px-4 py-10 sm:px-8">
-        <a href="/" className="absolute left-4 top-4 sm:left-8 sm:top-8 lg:hidden">
+        <Link href="/" className="absolute left-4 top-4 sm:left-8 sm:top-8 lg:hidden">
           <Logo className="h-14" variant="glow" />
-        </a>
+        </Link>
         <div className="w-full max-w-sm animate-auth-fade-up">
           <AuthModeTabs />
 

@@ -71,26 +71,33 @@ function SearchResults() {
   }, [parsed, q]);
 
   const matchedVendors = useMemo(() => {
-    return vendors
-      .filter((v) => {
-        if (parsed.city && v.citySlug !== parsed.city) return false;
-        if (parsed.eventType && !v.eventTypes.includes(parsed.eventType)) return false;
-        if (parsed.category && v.categorySlug !== parsed.category.slug) return false;
-        if (parsed.maxPrice && v.startingPrice > parsed.maxPrice) return false;
-        if (
-          !parsed.city &&
-          !parsed.eventType &&
-          !parsed.category &&
-          !parsed.maxPrice &&
-          q
-        ) {
-          return (
-            v.businessName.toLowerCase().includes(q.toLowerCase()) ||
-            v.services.some((s) => s.toLowerCase().includes(q.toLowerCase()))
-          );
-        }
-        return true;
-      })
+    const list = vendors.filter((v) => {
+      if (parsed.city && v.citySlug !== parsed.city) return false;
+      if (parsed.eventType && !v.eventTypes.includes(parsed.eventType)) return false;
+      if (parsed.category && v.categorySlug !== parsed.category.slug) return false;
+      if (parsed.maxPrice && v.startingPrice > parsed.maxPrice) return false;
+      if (
+        !parsed.city &&
+        !parsed.eventType &&
+        !parsed.category &&
+        !parsed.maxPrice &&
+        q
+      ) {
+        return (
+          v.businessName.toLowerCase().includes(q.toLowerCase()) ||
+          v.services.some((s) => s.toLowerCase().includes(q.toLowerCase()))
+        );
+      }
+      return true;
+    });
+
+    const mapped = list.map((v) => ({
+      ...v,
+      isSponsored: v.id === "vendor-1",
+    }));
+
+    return [...mapped]
+      .sort((a, b) => (b.isSponsored ? 1 : 0) - (a.isSponsored ? 1 : 0))
       .slice(0, RESULT_CAP);
   }, [parsed, q]);
 
@@ -159,7 +166,7 @@ function SearchResults() {
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {matchedVendors.map((v) => (
-                <VendorCard key={v.id} vendor={v} />
+                <VendorCard key={v.id} vendor={v} isSponsored={v.isSponsored} />
               ))}
             </div>
           )}

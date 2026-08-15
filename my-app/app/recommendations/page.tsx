@@ -10,7 +10,6 @@ import { VendorCard } from "@/components/shared/vendor-card";
 import { venues } from "@/lib/data/venues";
 import { vendors } from "@/lib/data/vendors";
 import { cities } from "@/lib/data/cities";
-import { eventTypes } from "@/lib/data/event-types";
 import { Venue, Vendor, CitySlug, EventTypeSlug } from "@/lib/types";
 
 const EXAMPLE_PROMPTS = [
