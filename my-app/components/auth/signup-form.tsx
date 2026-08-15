@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { User as UserIcon, Mail, Phone, Loader2, ArrowRight, CheckCircle2 } from "lucide-react";
+import { User as UserIcon, Mail, Phone, Lock, Loader2, ArrowRight, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AuthShowcase } from "@/components/auth/auth-showcase";
 import { AuthModeTabs } from "@/components/auth/mode-tabs";
-import { PasswordInput } from "@/components/auth/password-input";
 import { RoleToggle, type AuthRole } from "@/components/auth/role-toggle";
 import { Logo } from "@/components/shared/logo";
 
@@ -58,6 +57,7 @@ export function SignupForm() {
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
   const [step, setStep] = useState(0);
+  const [showPassword, setShowPassword] = useState(false);
   const password = watch("password") ?? "";
 
   function onSubmit() {
@@ -204,7 +204,16 @@ export function SignupForm() {
                 <div className="space-y-3">
                   <div className="space-y-1.5">
                     <Label htmlFor="password">Password</Label>
-                    <PasswordInput id="password" placeholder="••••••••" {...register("password")} />
+                    <div className="relative">
+                      <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        className="h-11 rounded-xl pl-9"
+                        {...register("password")}
+                      />
+                    </div>
                     {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
                     {password.length > 0 && (
                       <div className="flex flex-wrap gap-x-3 gap-y-1 pt-0.5">
@@ -225,10 +234,29 @@ export function SignupForm() {
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="confirmPassword">Confirm password</Label>
-                    <PasswordInput id="confirmPassword" placeholder="••••••••" {...register("confirmPassword")} />
+                    <div className="relative">
+                      <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        id="confirmPassword"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        className="h-11 rounded-xl pl-9"
+                        {...register("confirmPassword")}
+                      />
+                    </div>
                     {errors.confirmPassword && (
                       <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>
                     )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="showPassword"
+                      checked={showPassword}
+                      onCheckedChange={(v) => setShowPassword(v === true)}
+                    />
+                    <label htmlFor="showPassword" className="text-xs text-muted-foreground cursor-pointer">
+                      Show password
+                    </label>
                   </div>
                 </div>
                 <div className="flex gap-3">

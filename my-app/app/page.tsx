@@ -58,8 +58,17 @@ export default function Home() {
   return (
     <div className="bg-warm-white">
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blush/70 via-warm-white to-warm-white" />
+      <section className="relative isolate overflow-hidden border-b border-border">
+        <video
+          src="/Hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blush/50 via-warm-white/40 to-warm-white" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-warm-white via-warm-white/70 to-warm-white/40 lg:to-warm-white/30" />
         <div className="mx-auto max-w-7xl px-4 pt-14 sm:px-6 sm:pt-20 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
