@@ -38,22 +38,7 @@ export const eventTypes: EventType[] = [
       "https://images.unsplash.com/photo-1528218635780-5952720c9729?w=800&q=80",
     featured: true,
   },
-  {
-    slug: "anniversaries",
-    name: "Anniversaries",
-    group: "Family & Personal",
-    description: "Celebrate milestones with the ones you love",
-    image:
-      "https://images.unsplash.com/photo-1782786660912-d3cb05d25bd9?w=800&q=80",
-  },
-  {
-    slug: "housewarming",
-    name: "Housewarming",
-    group: "Family & Personal",
-    description: "Traditional griha pravesh and home celebrations",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-  },
+
   {
     slug: "family-functions",
     name: "Family Functions",
@@ -71,22 +56,7 @@ export const eventTypes: EventType[] = [
       "https://images.unsplash.com/photo-1485872299829-c673f5194813?w=800&q=80",
     featured: true,
   },
-  {
-    slug: "religious-celebrations",
-    name: "Religious Celebrations",
-    group: "Family & Personal",
-    description: "Poojas, satsangs and religious ceremonies",
-    image:
-      "https://images.unsplash.com/photo-1605292356183-a77d0a9c9d1d?w=800&q=80",
-  },
-  {
-    slug: "cultural-celebrations",
-    name: "Cultural Celebrations",
-    group: "Family & Personal",
-    description: "Festivals and cultural events celebrated in style",
-    image:
-      "https://images.unsplash.com/photo-1463592177119-bab2a00f3ccb?w=800&auto=format&fit=crop&q=80&ixlib=rb-4.1.0",
-  },
+
   // Corporate
   {
     slug: "office-parties",
@@ -168,63 +138,7 @@ export const eventTypes: EventType[] = [
     image:
       "https://images.unsplash.com/photo-1768508665663-fa483a0cb208?w=800&q=80",
   },
-  // College & Community
-  {
-    slug: "college-cultural-events",
-    name: "College Cultural Events",
-    group: "College & Community",
-    description: "Fests, cultural nights and campus celebrations",
-    image:
-      "https://images.unsplash.com/photo-1675575275907-a952a42aca26?w=800&q=80",
-  },
-  {
-    slug: "symposiums",
-    name: "Symposiums",
-    group: "College & Community",
-    description: "Academic and technical symposiums",
-    image:
-      "https://images.unsplash.com/photo-1778876091112-f7e985acdb01?w=800&q=80",
-  },
-  {
-    slug: "freshers-events",
-    name: "Freshers Events",
-    group: "College & Community",
-    description: "Welcome parties for the newest batch",
-    image:
-      "https://images.unsplash.com/photo-1779903597416-47d005a931ef?w=800&q=80",
-  },
-  {
-    slug: "farewell-events",
-    name: "Farewell Events",
-    group: "College & Community",
-    description: "Send-offs to remember, planned end to end",
-    image:
-      "https://images.unsplash.com/photo-1639765766830-d829d2fe4219?w=800&q=80",
-  },
-  {
-    slug: "college-functions",
-    name: "College Functions",
-    group: "College & Community",
-    description: "Annual days, inaugurations and campus functions",
-    image:
-      "https://images.unsplash.com/photo-1778876089323-9d558c4ceaaa?w=800&q=80",
-  },
-  {
-    slug: "community-programs",
-    name: "Community Programs",
-    group: "College & Community",
-    description: "Programs that bring neighborhoods together",
-    image:
-      "https://images.unsplash.com/photo-1761250027507-c0be614c0254?w=800&q=80",
-  },
-  {
-    slug: "cultural-programs",
-    name: "Cultural Programs",
-    group: "College & Community",
-    description: "Dance, music and drama programs for the community",
-    image:
-      "https://images.unsplash.com/photo-1774437557008-6f33efdd0332?w=800&q=80",
-  },
+
 ];
 
 export function getEventTypeBySlug(slug: string) {

@@ -21,12 +21,8 @@ export type EventTypeSlug =
   | "engagements"
   | "birthdays"
   | "baby-showers"
-  | "anniversaries"
-  | "housewarming"
   | "family-functions"
   | "private-parties"
-  | "religious-celebrations"
-  | "cultural-celebrations"
   | "office-parties"
   | "corporate-meetings"
   | "conferences"
@@ -36,16 +32,9 @@ export type EventTypeSlug =
   | "award-ceremonies"
   | "annual-celebrations"
   | "team-events"
-  | "business-events"
-  | "college-cultural-events"
-  | "symposiums"
-  | "freshers-events"
-  | "farewell-events"
-  | "college-functions"
-  | "community-programs"
-  | "cultural-programs";
+  | "business-events";
 
-export type EventGroup = "Family & Personal" | "Corporate" | "College & Community";
+export type EventGroup = "Family & Personal" | "Corporate";
 
 export interface EventType {
   slug: EventTypeSlug;

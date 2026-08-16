@@ -1,153 +1,114 @@
-import Image from "next/image";
-import { Users, Briefcase, GraduationCap, ArrowUpRight } from "lucide-react";
-import { eventTypes, getEventTypeBySlug } from "@/lib/data/event-types";
-import { EventGroupNav } from "@/components/events/event-group-nav";
+"use client";
+
+import { useState } from "react";
+import { Users, Briefcase, Sparkles, Search } from "lucide-react";
+import { eventTypes } from "@/lib/data/event-types";
 import { EventBentoGrid } from "@/components/events/event-bento-grid";
-
-export const metadata = {
-  title: "Explore Events | Evently",
-};
-
-const GROUPS = [
-  {
-    slug: "family-personal",
-    label: "Family & Personal",
-    group: "Family & Personal" as const,
-    icon: Users,
-    iconName: "Users",
-    tagline: "The moments you gather for — from first birthdays to golden anniversaries.",
-  },
-  {
-    slug: "corporate",
-    label: "Corporate",
-    group: "Corporate" as const,
-    icon: Briefcase,
-    iconName: "Briefcase",
-    tagline: "From boardroom meetings to company-wide celebrations, handled end to end.",
-  },
-  {
-    slug: "college-community",
-    label: "College & Community",
-    group: "College & Community" as const,
-    icon: GraduationCap,
-    iconName: "GraduationCap",
-    tagline: "Campus fests, farewells and neighborhood programs that bring people together.",
-  },
-];
-
-const HERO_IMAGES: Record<string, string | undefined> = {
-  "family-personal": getEventTypeBySlug("weddings")?.image,
-  corporate: getEventTypeBySlug("conferences")?.image,
-  "college-community": getEventTypeBySlug("college-cultural-events")?.image,
-};
+import { Input } from "@/components/ui/input";
 
 export default function EventsPage() {
-  const navGroups = GROUPS.map((g) => ({
-    slug: g.slug,
-    label: g.label,
-    icon: g.iconName,
-    count: eventTypes.filter((e) => e.group === g.group).length,
-  }));
+  const [activeTab, setActiveTab] = useState<"Family & Personal" | "Corporate">("Family & Personal");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const familyEvents = eventTypes.filter((e) => e.group === "Family & Personal");
+  const corporateEvents = eventTypes.filter((e) => e.group === "Corporate");
+
+  const activeEvents = activeTab === "Family & Personal" ? familyEvents : corporateEvents;
+
+  // Filter events based on search query
+  const filteredEvents = activeEvents.filter(
+    (e) =>
+      e.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      e.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="mx-auto max-w-7xl px-4 pt-10 pb-8 sm:px-6 sm:pt-14 lg:px-8">
-        <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-blush px-3 py-1 text-xs font-semibold text-burgundy">
-            {eventTypes.length} occasions, one platform
+    <div className="min-h-screen bg-warm-white/20 pb-20">
+      {/* Hero Header */}
+      <section className="mx-auto max-w-7xl px-4 pt-16 pb-10 text-center sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-rose/5 px-4 py-1.5 text-xs font-semibold text-rose tracking-wide">
+            <Sparkles className="h-3.5 w-3.5" />
+            Every Occasion Has a Home Here
           </span>
-          <h1 className="mt-4 font-heading text-4xl font-extrabold leading-[1.05] text-charcoal sm:text-5xl">
-            Every occasion
-            <br />
-            has a home here.
+          <h1 className="mt-5 font-heading text-4xl font-extrabold tracking-tight text-charcoal sm:text-5xl md:text-6xl leading-none">
+            Choose Your Event Type
           </h1>
-          <p className="mt-4 max-w-md text-base text-muted-foreground">
-            Weddings, board meetings, farewell parties, cultural fests —
-            pick where your event lives and jump straight to venues and
-            vendors built for it.
+          <p className="mt-5 text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            Find the perfect setting and specialized vendors tailored specifically to your event category.
           </p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {GROUPS.map((g) => {
-            const image = HERO_IMAGES[g.slug];
-            const count = eventTypes.filter((e) => e.group === g.group).length;
-            return (
-              <a
-                key={g.slug}
-                href={`#${g.slug}`}
-                className="group relative block h-64 overflow-hidden rounded-3xl sm:h-80"
-              >
-                {image && (
-                  <Image
-                    src={image}
-                    alt={g.label}
-                    fill
-                    sizes="(min-width: 640px) 33vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent" />
-                <div className="absolute inset-x-0 top-0 flex items-center justify-between p-4">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90">
-                    <g.icon className="h-4 w-4 text-rose" />
-                  </span>
-                  <span className="rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-charcoal">
-                    {count} types
-                  </span>
-                </div>
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <h2 className="font-heading text-xl font-bold text-white">
-                    {g.label}
-                  </h2>
-                  <p className="mt-1 line-clamp-2 text-xs text-white/80">
-                    {g.tagline}
-                  </p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white opacity-0 transition-opacity group-hover:opacity-100">
-                    Explore <ArrowUpRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </a>
-            );
-          })}
+        {/* Search & Tabs Controls */}
+        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row max-w-2xl mx-auto">
+          {/* Tab buttons */}
+          <div className="flex rounded-xl bg-charcoal/5 p-1 w-full sm:w-auto shrink-0 border border-charcoal/[0.03]">
+            <button
+              onClick={() => {
+                setActiveTab("Family & Personal");
+                setSearchQuery("");
+              }}
+              className={`flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                activeTab === "Family & Personal"
+                  ? "bg-white text-charcoal shadow-sm shadow-charcoal/5"
+                  : "text-muted-foreground hover:text-charcoal"
+              }`}
+            >
+              <Users className="h-4 w-4" />
+              Family & Personal
+              <span className="ml-1 rounded-full bg-rose/5 px-2 py-0.5 text-xs font-semibold text-rose">
+                {familyEvents.length}
+              </span>
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab("Corporate");
+                setSearchQuery("");
+              }}
+              className={`flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                activeTab === "Corporate"
+                  ? "bg-white text-charcoal shadow-sm shadow-charcoal/5"
+                  : "text-muted-foreground hover:text-charcoal"
+              }`}
+            >
+              <Briefcase className="h-4 w-4" />
+              Corporate
+              <span className="ml-1 rounded-full bg-rose/5 px-2 py-0.5 text-xs font-semibold text-rose">
+                {corporateEvents.length}
+              </span>
+            </button>
+          </div>
+
+          {/* Search bar inside the page */}
+          <div className="relative w-full">
+            <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/60" />
+            <Input
+              type="text"
+              placeholder={`Search ${activeTab.toLowerCase()} events...`}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-11 w-full rounded-xl border-border bg-white pl-10 pr-4 text-sm text-charcoal placeholder:text-muted-foreground/60 focus-visible:ring-rose"
+            />
+          </div>
         </div>
       </section>
 
-      <EventGroupNav groups={navGroups} />
-
-      {/* Groups */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {GROUPS.map((g) => {
-          const events = eventTypes.filter((e) => e.group === g.group);
-          return (
-            <section
-              key={g.slug}
-              id={g.slug}
-              className="scroll-mt-32 border-b border-border py-12 last:border-b-0"
-            >
-              <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-rose">
-                    <g.icon className="h-4 w-4" />
-                    <span className="text-xs font-semibold uppercase tracking-wide">
-                      {g.label}
-                    </span>
-                  </div>
-                  <h2 className="mt-1 font-heading text-2xl font-bold text-charcoal sm:text-3xl">
-                    {g.tagline}
-                  </h2>
-                </div>
-                <span className="shrink-0 text-sm text-muted-foreground">
-                  {events.length} event types
-                </span>
-              </div>
-
-              <EventBentoGrid events={events} />
-            </section>
-          );
-        })}
-      </div>
+      {/* Grid Container */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {filteredEvents.length > 0 ? (
+          <div className="transition-opacity duration-300">
+            <EventBentoGrid events={filteredEvents} />
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border bg-white py-16 text-center shadow-sm">
+            <Search className="h-10 w-10 text-muted-foreground/40" />
+            <h3 className="mt-4 text-lg font-bold text-charcoal">No events found</h3>
+            <p className="mt-1 text-sm text-muted-foreground max-w-xs">
+              We couldn&apos;t find any events matching &ldquo;{searchQuery}&rdquo;. Try another search term.
+            </p>
+          </div>
+        )}
+      </section>
     </div>
   );
 }

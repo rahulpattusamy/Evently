@@ -48,9 +48,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-border bg-white transition-transform duration-300 ${
-        isCompactSearchActive ? "-translate-y-full" : "translate-y-0"
-      }`}
+      className="relative z-50 border-b border-border bg-white"
     >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center">

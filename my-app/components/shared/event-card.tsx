@@ -8,9 +8,8 @@ export function EventCard({ event, className }: { event: EventType; className?: 
     <Link
       href={`/events/${event.slug}`}
       className={cn(
-        "group relative block h-64 shrink-0 overflow-hidden rounded-2xl",
-        !className && "w-56 sm:w-64",
-        className
+        "group relative block overflow-hidden rounded-2xl",
+        !className ? "h-64 w-56 sm:w-64 shrink-0" : className
       )}
     >
       <Image
