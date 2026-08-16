@@ -24,16 +24,10 @@ const EVENT_KEYWORDS: { keyword: string; slug: EventTypeSlug; label: string }[] 
   { keyword: "birthday", slug: "birthdays", label: "Birthday" },
   { keyword: "engagement", slug: "engagements", label: "Engagement" },
   { keyword: "baby shower", slug: "baby-showers", label: "Baby Shower" },
-  { keyword: "anniversary", slug: "anniversaries", label: "Anniversary" },
-  { keyword: "housewarming", slug: "housewarming", label: "Housewarming" },
   { keyword: "corporate", slug: "corporate-meetings", label: "Corporate Event" },
   { keyword: "conference", slug: "conferences", label: "Conference" },
   { keyword: "product launch", slug: "product-launches", label: "Product Launch" },
   { keyword: "team", slug: "team-events", label: "Team Event" },
-  { keyword: "college", slug: "college-functions", label: "College Event" },
-  { keyword: "farewell", slug: "farewell-events", label: "Farewell Event" },
-  { keyword: "fresher", slug: "freshers-events", label: "Freshers Event" },
-  { keyword: "cultural", slug: "cultural-programs", label: "Cultural Program" },
 ];
 
 interface Parsed {

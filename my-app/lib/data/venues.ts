@@ -27,17 +27,13 @@ const CORPORATE_IMG = [
 const WEDDING_EVENTS: EventTypeSlug[] = [
   "weddings",
   "engagements",
-  "anniversaries",
-  "religious-celebrations",
 ];
 const CELEBRATION_EVENTS: EventTypeSlug[] = [
   "weddings",
   "birthdays",
   "baby-showers",
-  "housewarming",
   "family-functions",
   "private-parties",
-  "cultural-celebrations",
 ];
 const CORPORATE_EVENTS: EventTypeSlug[] = [
   "corporate-meetings",
@@ -49,13 +45,7 @@ const CORPORATE_EVENTS: EventTypeSlug[] = [
   "annual-celebrations",
   "business-events",
 ];
-const COLLEGE_EVENTS: EventTypeSlug[] = [
-  "college-cultural-events",
-  "symposiums",
-  "freshers-events",
-  "farewell-events",
-  "college-functions",
-];
+const COLLEGE_EVENTS: EventTypeSlug[] = [];
 
 interface VenueSeed {
   name: string;

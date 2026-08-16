@@ -57,11 +57,10 @@ const PORTFOLIO_SETS: Record<string, string[]> = {
   ],
 };
 
-const WEDDING_EVENTS: EventTypeSlug[] = ["weddings", "engagements", "anniversaries"];
+const WEDDING_EVENTS: EventTypeSlug[] = ["weddings", "engagements"];
 const CELEBRATION_EVENTS: EventTypeSlug[] = [
   "birthdays",
   "baby-showers",
-  "housewarming",
   "family-functions",
   "private-parties",
 ];
@@ -77,13 +76,7 @@ const CORPORATE_EVENTS: EventTypeSlug[] = [
   "business-events",
   "office-parties",
 ];
-const COLLEGE_EVENTS: EventTypeSlug[] = [
-  "college-cultural-events",
-  "symposiums",
-  "freshers-events",
-  "farewell-events",
-  "college-functions",
-];
+const COLLEGE_EVENTS: EventTypeSlug[] = [];
 
 function packages(base: number, unit: string): VendorPackage[] {
   return [
