@@ -80,29 +80,47 @@ export function SearchBar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="flex-1">
-          <SearchAutocomplete
-            value={query}
-            onChange={setQuery}
-            onSubmit={handleQuerySubmit}
-            placeholder="Search venues, vendors or events..."
-          />
+        {/* Unified Search + Location Box */}
+        <div className="flex flex-1 items-center rounded-xl border border-border bg-white p-0.5 focus-within:border-rose/50 focus-within:ring-1 focus-within:ring-rose/30">
+          <div className="pl-4 text-muted-foreground flex items-center shrink-0">
+            <Search className="h-4.5 w-4.5 text-muted-foreground/60" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <SearchAutocomplete
+              value={query}
+              onChange={setQuery}
+              onSubmit={handleQuerySubmit}
+              placeholder="Search venues, vendors or events..."
+              inputClassName="w-full bg-transparent border-0 py-2.5 pl-2 pr-4 text-sm text-charcoal outline-none focus:outline-none placeholder:text-muted-foreground/60 focus:ring-0"
+              className="relative w-full"
+            />
+          </div>
+          
+          {/* Vertical divider */}
+          <div className="h-6 w-px bg-border shrink-0 hidden sm:block" />
+          
+          {/* City Selector */}
+          <Select value={city} onValueChange={setCity}>
+            <SelectTrigger className="hidden w-40 shrink-0 sm:flex border-0 shadow-none bg-transparent pl-3.5 pr-3 focus:ring-0 rounded-none">
+              <div className="flex items-center gap-2 text-muted-foreground/75">
+                <MapPin className="h-4 w-4 shrink-0 text-muted-foreground/60" />
+                <SelectValue placeholder="City" />
+              </div>
+            </SelectTrigger>
+            <SelectContent>
+              {cities.map((c) => (
+                <SelectItem key={c.slug} value={c.slug}>
+                  {c.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-        <Select value={city} onValueChange={setCity}>
-          <SelectTrigger className="hidden w-40 shrink-0 sm:flex">
-            <SelectValue placeholder="City" />
-          </SelectTrigger>
-          <SelectContent>
-            {cities.map((c) => (
-              <SelectItem key={c.slug} value={c.slug}>
-                {c.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+
+        {/* Find Services Button */}
         <Button
           onClick={handleSearch}
-          className="h-10 shrink-0 bg-rose text-white hover:bg-burgundy"
+          className="h-11 shrink-0 rounded-xl bg-rose px-6 font-semibold text-white hover:bg-burgundy flex items-center gap-2 cursor-pointer shadow-md shadow-rose/10"
         >
           <Search className="h-4 w-4" />
           <span className="hidden sm:inline">Find Services</span>
