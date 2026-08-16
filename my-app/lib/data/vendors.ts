@@ -164,29 +164,53 @@ const seeds: VendorSeed[] = [
   { businessName: "Campus Certificates Co.", ownerName: "Geeta Rao", categorySlug: "certificate-printing", citySlug: "coimbatore", area: "Peelamedu", tagline: "Certificate printing for college and corporate events", startingPrice: 1000, rating: 4.5, reviewCount: 29, verified: true, portfolioSet: "printing", services: ["Certificate Printing", "Custom Design", "Bulk Orders"], eventTypes: [...COLLEGE_EVENTS, "award-ceremonies"], yearsInBusiness: 5, responseTime: "Under 5 hours", packageUnit: "certificate order" },
 ];
 
-export const vendors: Vendor[] = seeds.map((seed, i) => ({
-  id: `vendor-${i + 1}`,
-  businessName: seed.businessName,
-  ownerName: seed.ownerName,
-  categorySlug: seed.categorySlug,
-  citySlug: seed.citySlug,
-  address: `${seed.area}, ${seed.citySlug[0].toUpperCase()}${seed.citySlug.slice(1)}`,
-  tagline: seed.tagline,
-  description: `${seed.businessName} is a ${seed.verified ? "verified " : ""}${seed.categorySlug.replace(/-/g, " ")} based in ${seed.area}, ${seed.citySlug}, with ${seed.yearsInBusiness} years of experience delivering ${seed.services.join(", ").toLowerCase()} for events across the city.`,
-  startingPrice: seed.startingPrice,
-  rating: seed.rating,
-  reviewCount: seed.reviewCount,
-  verified: seed.verified,
-  premium: seed.premium,
-  coverImage: PORTFOLIO_SETS[seed.portfolioSet][0],
-  logoImage: PORTFOLIO_SETS[seed.portfolioSet][1],
-  portfolio: PORTFOLIO_SETS[seed.portfolioSet],
-  services: seed.services,
-  packages: packages(seed.startingPrice, seed.packageUnit),
-  eventTypes: seed.eventTypes,
-  yearsInBusiness: seed.yearsInBusiness,
-  responseTime: seed.responseTime,
-}));
+import { newMappedVendors } from "./new-vendors-data";
+
+const categoriesToReplace = new Set([
+  "wedding-planners",
+  "event-planners",
+  "decorators",
+  "caterers",
+  "bakers",
+  "specialty-food-vendors",
+  "photographers",
+  "makeup-artists",
+  "mehendi-artists",
+  "djs",
+  "bridal-wear",
+  "groom-wear",
+  "invitation-designers",
+  "banner-designers",
+  "gifts",
+]);
+
+const seedsMappedVendors: Vendor[] = seeds
+  .filter((seed) => !categoriesToReplace.has(seed.categorySlug))
+  .map((seed, i) => ({
+    id: `vendor-${i + 1}`,
+    businessName: seed.businessName,
+    ownerName: seed.ownerName,
+    categorySlug: seed.categorySlug,
+    citySlug: seed.citySlug,
+    address: `${seed.area}, ${seed.citySlug[0].toUpperCase()}${seed.citySlug.slice(1)}`,
+    tagline: seed.tagline,
+    description: `${seed.businessName} is a ${seed.verified ? "verified " : ""}${seed.categorySlug.replace(/-/g, " ")} based in ${seed.area}, ${seed.citySlug}, with ${seed.yearsInBusiness} years of experience delivering ${seed.services.join(", ").toLowerCase()} for events across the city.`,
+    startingPrice: seed.startingPrice,
+    rating: seed.rating,
+    reviewCount: seed.reviewCount,
+    verified: seed.verified,
+    premium: seed.premium,
+    coverImage: PORTFOLIO_SETS[seed.portfolioSet][0],
+    logoImage: PORTFOLIO_SETS[seed.portfolioSet][1],
+    portfolio: PORTFOLIO_SETS[seed.portfolioSet],
+    services: seed.services,
+    packages: packages(seed.startingPrice, seed.packageUnit),
+    eventTypes: seed.eventTypes,
+    yearsInBusiness: seed.yearsInBusiness,
+    responseTime: seed.responseTime,
+  }));
+
+export const vendors: Vendor[] = [...seedsMappedVendors, ...newMappedVendors];
 
 export function getVendorById(id: string) {
   return vendors.find((v) => v.id === id);
