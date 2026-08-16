@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import * as Icons from "lucide-react";
 import { LucideProps, Sparkles } from "lucide-react";
 import { ServiceCategory } from "@/lib/types";
@@ -24,31 +25,116 @@ function CategoryIcon({ name, ...props }: { name: string } & LucideProps) {
     );
   }
 
-  const Icon = (Icons as unknown as Record<IconName, React.ComponentType<LucideProps>>)[
-    name as IconName
-  ];
+  const Icon = (
+    Icons as unknown as Record<IconName, React.ComponentType<LucideProps>>
+  )[name as IconName];
   if (!Icon) return <Sparkles {...props} />;
   return <Icon {...props} />;
 }
 
-export function ServiceCategoryCard({ category }: { category: ServiceCategory }) {
+function getCategoryImage(slug: string): string {
+  switch (slug) {
+    case "wedding-planners":
+      return "/WeddingPlanner.png";
+    case "event-planners":
+      return "/Eventplanner.png";
+    case "decorators":
+    case "stage-decorators":
+    case "backdrop-designers":
+    case "floral-decorators":
+      return "/Decrators.png";
+    case "caterers":
+      return "/Cateres.png";
+    case "bakers":
+      return "/Bakers.png";
+    case "specialty-food-vendors":
+      return "/Spfoodvendor.png";
+    case "photographers":
+    case "videographers":
+    case "drone-photography":
+      return "/Photography.png";
+    case "djs":
+    case "live-music":
+    case "singers":
+    case "bands":
+    case "performers":
+    case "anchors-hosts":
+    case "magicians":
+    case "dance-groups":
+    case "sound-systems":
+      return "/Dj.png";
+    case "makeup-artists":
+    case "hair-stylists":
+      return "/Makeup.jpeg";
+    case "mehendi-artists":
+      return "/Mehendi.png";
+    case "bridal-wear":
+      return "/bridal.png";
+    case "groom-wear":
+      return "/Groom.png";
+    case "gifts":
+      return "/Gift.png";
+    case "banner-designers":
+    case "banner-printing":
+      return "/Banner.png";
+    case "invitation-designers":
+    case "presentation-designers":
+    case "poster-designers":
+    case "flyer-designers":
+    case "stage-backdrop-designers":
+    case "digital-creative-designers":
+    case "social-media-creative-designers":
+    case "invitation-printing":
+    case "poster-printing":
+    case "brochure-printing":
+    case "standee-printing":
+    case "certificate-printing":
+      return "/Invitation.png";
+    default:
+      return "/WeddingPlanner.png"; // Fallback image
+  }
+}
+
+export function ServiceCategoryCard({
+  category,
+}: {
+  category: ServiceCategory;
+}) {
+  const imageUrl = getCategoryImage(category.slug);
+
   return (
     <Link
       href={`/services/${category.slug}`}
-      className="group flex flex-col items-center rounded-[2rem] border border-border bg-white px-5 py-9 text-center transition-all duration-300 hover:-translate-y-1 hover:border-rose/20 hover:shadow-xl hover:shadow-rose/5"
+      className="group flex flex-col rounded-[2rem] border border-border bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-rose/20 hover:shadow-xl hover:shadow-rose/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose focus-visible:ring-offset-2"
     >
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-rose/5 transition-colors group-hover:bg-rose/10">
-        <CategoryIcon
-          name={category.icon}
-          className="h-7 w-7 text-rose transition-transform duration-300 group-hover:scale-110"
+      {/* Image Banner */}
+      <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted">
+        <Image
+          src={imageUrl}
+          alt="" /* Left empty as the link text already provides the descriptive name for screen readers, preventing redundant readouts. */
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
-      <h3 className="mt-6 text-[17px] font-bold tracking-tight text-charcoal leading-snug">
-        {category.name}
-      </h3>
-      <p className="mt-3 text-xs text-muted-foreground leading-relaxed max-w-[130px]">
-        {category.description}
-      </p>
+
+      {/* Card Body */}
+      <div className="relative flex flex-col items-start px-5 pt-7 pb-6 text-left">
+        {/* Floating Pink Circular Icon (White bg, rose border, rose icon) */}
+        <div className="absolute left-4 -top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-rose bg-white shadow-md shadow-rose/10 text-rose" aria-hidden="true">
+          <CategoryIcon
+            name={category.icon}
+            className="h-5 w-5 text-rose transition-transform duration-300 group-hover:scale-110"
+          />
+        </div>
+
+        <h3 className="text-base font-bold tracking-tight text-charcoal leading-snug group-hover:text-burgundy transition-colors duration-300">
+          {category.name}
+        </h3>
+        <p className="mt-1 text-xs text-charcoal/80 leading-relaxed max-w-[170px] line-clamp-2">
+          {category.description}
+        </p>
+      </div>
     </Link>
   );
 }
