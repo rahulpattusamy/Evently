@@ -22,7 +22,6 @@ interface ServiceDiscoverySectionProps {
 const TABS = [
   { id: "all", label: "Featured", icon: Sparkles },
   { id: "Planning", label: "Planners", icon: Calendar },
-  { id: "Decorators", label: "Decorators", icon: Paintbrush },
   { id: "Food", label: "Catering & Cakes", icon: Utensils },
   { id: "Photography", label: "Photography", icon: Camera },
   { id: "Entertainment", label: "Entertainment", icon: Music },

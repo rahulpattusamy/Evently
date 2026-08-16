@@ -98,13 +98,6 @@ export const categories: ServiceCategory[] = [
     description: "DJ music for every party",
   },
   {
-    slug: "live-music",
-    name: "Live Music",
-    group: "Entertainment",
-    icon: "Music",
-    description: "Live bands and musicians",
-  },
-  {
     slug: "singers",
     name: "Singers",
     group: "Entertainment",
@@ -112,32 +105,11 @@ export const categories: ServiceCategory[] = [
     description: "Solo vocalists for every occasion",
   },
   {
-    slug: "bands",
-    name: "Bands",
-    group: "Entertainment",
-    icon: "Guitar",
-    description: "Full performing bands",
-  },
-  {
-    slug: "performers",
-    name: "Performers",
-    group: "Entertainment",
-    icon: "Drama",
-    description: "Dancers, acrobats and stage performers",
-  },
-  {
     slug: "anchors-hosts",
     name: "Anchors / Hosts",
     group: "Entertainment",
     icon: "Mic",
     description: "Professional event hosts and emcees",
-  },
-  {
-    slug: "magicians",
-    name: "Magicians",
-    group: "Entertainment",
-    icon: "Wand2",
-    description: "Magic shows for all ages",
   },
   {
     slug: "dance-groups",

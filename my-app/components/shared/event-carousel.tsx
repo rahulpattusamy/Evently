@@ -41,8 +41,8 @@ const EVENT_EXTRA_INFO: Record<
   "private-parties": {
     popularity: "91% (Weekend Peak)",
     budget: "Custom packages",
-    services: ["Private dining & villa rentals", "Live music & DJ booking", "Cocktail bar setups"],
-    planningTip: "Live acoustic music sets a warm, inviting tone for private gatherings.",
+    services: ["Private dining & villa rentals", "DJ & Singer booking", "Cocktail bar setups"],
+    planningTip: "DJs or solo singers set a warm, inviting tone for private gatherings.",
     statsText: "85+ high-end party lounges and verified bartenders ready.",
   },
 };

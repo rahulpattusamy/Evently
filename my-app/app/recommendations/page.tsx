@@ -166,7 +166,7 @@ export default function RecommendationsPage() {
     ? pickVendorsByCategory(submitted, ["photographers", "videographers", "drone-photography"])
     : [];
   const recommendedEntertainment = submitted
-    ? pickVendorsByCategory(submitted, ["djs", "live-music", "bands", "anchors-hosts", "performers"])
+    ? pickVendorsByCategory(submitted, ["djs", "anchors-hosts"])
     : [];
 
   const chips: { label: string; value: string }[] = submitted

@@ -50,22 +50,24 @@ function getCategoryImage(slug: string): string {
     case "specialty-food-vendors":
       return "/Spfoodvendor.png";
     case "photographers":
-    case "videographers":
-    case "drone-photography":
       return "/Photography.png";
+    case "videographers":
+      return "/Videographer.png";
+    case "drone-photography":
+      return "/Drone.png";
     case "djs":
-    case "live-music":
-    case "singers":
-    case "bands":
-    case "performers":
-    case "anchors-hosts":
-    case "magicians":
-    case "dance-groups":
     case "sound-systems":
       return "/Dj.png";
+    case "singers":
+      return "/singer.png";
+    case "anchors-hosts":
+      return "/Anchor.png";
+    case "dance-groups":
+      return "/Dance.png";
     case "makeup-artists":
-    case "hair-stylists":
       return "/Makeup.jpeg";
+    case "hair-stylists":
+      return "/hairstylist.png";
     case "mehendi-artists":
       return "/Mehendi.png";
     case "bridal-wear":
