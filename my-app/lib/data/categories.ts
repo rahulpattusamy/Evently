@@ -7,43 +7,43 @@ export const categories: ServiceCategory[] = [
     name: "Wedding Planners",
     group: "Planning",
     icon: "CalendarHeart",
-    description: "End-to-end wedding planning and coordination",
+    description: "Plan your perfect wedding",
   },
   {
     slug: "event-planners",
     name: "Event Planners",
     group: "Planning",
     icon: "CalendarCheck",
-    description: "Full-service planning for any event",
+    description: "Corporate, private & more",
   },
-  // Decoration
+  // Decorators
   {
     slug: "decorators",
     name: "Decorators",
-    group: "Decoration",
+    group: "Decorators",
     icon: "Sparkles",
-    description: "Complete venue decoration services",
+    description: "Creative themes & decor",
   },
   {
     slug: "stage-decorators",
     name: "Stage Decorators",
-    group: "Decoration",
+    group: "Decorators",
     icon: "Theater",
-    description: "Stunning stage setups for every occasion",
+    description: "Stunning stage setups",
   },
   {
     slug: "backdrop-designers",
     name: "Backdrop Designers",
-    group: "Decoration",
+    group: "Decorators",
     icon: "Image",
-    description: "Custom photo backdrops and stage backdrops",
+    description: "Unique backdrops for every event",
   },
   {
     slug: "floral-decorators",
     name: "Floral Decorators",
-    group: "Decoration",
+    group: "Decorators",
     icon: "Flower2",
-    description: "Fresh and artificial floral arrangements",
+    description: "Beautiful flowers & arrangements",
   },
   // Food
   {
@@ -51,21 +51,21 @@ export const categories: ServiceCategory[] = [
     name: "Caterers",
     group: "Food",
     icon: "ChefHat",
-    description: "Multi-cuisine catering for every guest count",
+    description: "Delicious menus for every taste",
   },
   {
     slug: "bakers",
     name: "Bakers",
     group: "Food",
     icon: "Cake",
-    description: "Custom cakes and desserts",
+    description: "Custom cakes for occasions",
   },
   {
     slug: "specialty-food-vendors",
     name: "Specialty Food Vendors",
     group: "Food",
     icon: "UtensilsCrossed",
-    description: "Live counters, chaat, and specialty food stalls",
+    description: "Unique cuisines & live counters",
   },
   // Photography
   {
@@ -73,7 +73,7 @@ export const categories: ServiceCategory[] = [
     name: "Photographers",
     group: "Photography",
     icon: "Camera",
-    description: "Candid and traditional event photography",
+    description: "Capture every special moment",
   },
   {
     slug: "videographers",
@@ -95,7 +95,7 @@ export const categories: ServiceCategory[] = [
     name: "DJs",
     group: "Entertainment",
     icon: "Disc3",
-    description: "Professional DJs for every event",
+    description: "DJ music for every party",
   },
   {
     slug: "live-music",
@@ -152,7 +152,7 @@ export const categories: ServiceCategory[] = [
     name: "Makeup Artists",
     group: "Beauty",
     icon: "Palette",
-    description: "Bridal and party makeup artists",
+    description: "Bridal & party makeup artists",
   },
   {
     slug: "hair-stylists",
@@ -166,7 +166,7 @@ export const categories: ServiceCategory[] = [
     name: "Mehendi Artists",
     group: "Beauty",
     icon: "Hand",
-    description: "Bridal and party mehendi designs",
+    description: "Intricate & bridal mehendi designs",
   },
   // Design
   {
@@ -340,7 +340,7 @@ export function getCategoryBySlug(slug: string) {
 
 export const categoryGroups: ServiceCategory["group"][] = [
   "Planning",
-  "Decoration",
+  "Decorators",
   "Food",
   "Photography",
   "Entertainment",

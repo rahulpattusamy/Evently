@@ -58,7 +58,7 @@ export interface EventType {
 
 export type ServiceCategoryGroup =
   | "Planning"
-  | "Decoration"
+  | "Decorators"
   | "Food"
   | "Photography"
   | "Entertainment"

@@ -17,15 +17,20 @@ export function ServiceCategoryCard({ category }: { category: ServiceCategory })
   return (
     <Link
       href={`/services/${category.slug}`}
-      className="group flex flex-col items-center gap-3 rounded-2xl border border-border bg-white p-5 text-center transition-all hover:-translate-y-0.5 hover:border-rose hover:shadow-md hover:shadow-charcoal/5"
+      className="group flex flex-col items-center rounded-[2rem] border border-border bg-white px-5 py-9 text-center transition-all duration-300 hover:-translate-y-1 hover:border-rose/20 hover:shadow-xl hover:shadow-rose/5"
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blush transition-colors group-hover:bg-rose">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-rose/5 transition-colors group-hover:bg-rose/10">
         <CategoryIcon
           name={category.icon}
-          className="h-5 w-5 text-rose transition-colors group-hover:text-white"
+          className="h-7 w-7 text-rose transition-transform duration-300 group-hover:scale-110"
         />
       </div>
-      <span className="text-sm font-medium text-charcoal">{category.name}</span>
+      <h3 className="mt-6 text-[17px] font-bold tracking-tight text-charcoal leading-snug">
+        {category.name}
+      </h3>
+      <p className="mt-3 text-xs text-muted-foreground leading-relaxed max-w-[130px]">
+        {category.description}
+      </p>
     </Link>
   );
 }

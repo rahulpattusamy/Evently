@@ -45,7 +45,6 @@ export const eventTypes: EventType[] = [
     description: "Celebrate milestones with the ones you love",
     image:
       "https://images.unsplash.com/photo-1782786660912-d3cb05d25bd9?w=800&q=80",
-    featured: true,
   },
   {
     slug: "housewarming",
@@ -54,7 +53,6 @@ export const eventTypes: EventType[] = [
     description: "Traditional griha pravesh and home celebrations",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-    featured: true,
   },
   {
     slug: "family-functions",
@@ -88,7 +86,6 @@ export const eventTypes: EventType[] = [
     description: "Festivals and cultural events celebrated in style",
     image:
       "https://images.unsplash.com/photo-1463592177119-bab2a00f3ccb?w=800&auto=format&fit=crop&q=80&ixlib=rb-4.1.0",
-    featured: true,
   },
   // Corporate
   {

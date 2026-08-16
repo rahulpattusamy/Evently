@@ -35,7 +35,7 @@ interface ServiceOption {
 const SERVICE_OPTIONS: ServiceOption[] = [
   { label: "Venue", group: "Venue" },
   { label: "Planner", group: "Planning" },
-  { label: "Decoration", group: "Decoration" },
+  { label: "Decoration", group: "Decorators" },
   { label: "Catering", group: "Food" },
   { label: "Photography", group: "Photography" },
   { label: "Music", group: "Entertainment" },
