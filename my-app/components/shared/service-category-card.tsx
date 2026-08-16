@@ -6,6 +6,24 @@ import { ServiceCategory } from "@/lib/types";
 type IconName = keyof typeof Icons;
 
 function CategoryIcon({ name, ...props }: { name: string } & LucideProps) {
+  if (name === "Dress") {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+      >
+        <path d="M12 2a2 2 0 0 0-2 2v1" />
+        <path d="M6 7h12l-1 5 3 8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1l3-8z" />
+        <path d="M10 7a2 2 0 0 0 4 0" />
+      </svg>
+    );
+  }
+
   const Icon = (Icons as unknown as Record<IconName, React.ComponentType<LucideProps>>)[
     name as IconName
   ];

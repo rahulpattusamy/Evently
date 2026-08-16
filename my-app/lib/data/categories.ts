@@ -332,6 +332,27 @@ export const categories: ServiceCategory[] = [
     icon: "Printer",
     description: "Certificate printing for college and corporate events",
   },
+  {
+    slug: "bridal-wear",
+    name: "Bridal Wear",
+    group: "Beauty",
+    icon: "Dress",
+    description: "Stunning lehengas & bridal wear",
+  },
+  {
+    slug: "groom-wear",
+    name: "Groom Wear",
+    group: "Beauty",
+    icon: "Shirt",
+    description: "Sherwanis, suits & groom attire",
+  },
+  {
+    slug: "gifts",
+    name: "Gifts & Favors",
+    group: "Planning",
+    icon: "Gift",
+    description: "Curated event gifts & return favors",
+  },
 ];
 
 export function getCategoryBySlug(slug: string) {
