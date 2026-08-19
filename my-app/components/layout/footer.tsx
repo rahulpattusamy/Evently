@@ -120,7 +120,7 @@ export function Footer() {
         {/* Link grid */}
         <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-5">
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="inline-flex items-center">
+            <Link href="/" className="inline-flex items-center -ml-6">
               <Logo className="h-28" variant="default" />
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">

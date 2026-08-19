@@ -76,6 +76,10 @@ function getCategoryImage(slug: string): string {
       return "/Groom.png";
     case "gifts":
       return "/Gift.png";
+    case "vessels-chairs-rental":
+      return "/Cateres.png";
+    case "cabs-vans-rental":
+      return "/Eventplanner.png";
     case "banner-designers":
     case "banner-printing":
       return "/Banner.png";
@@ -130,10 +134,10 @@ export function ServiceCategoryCard({
           />
         </div>
 
-        <h3 className="text-base font-bold tracking-tight text-charcoal leading-snug group-hover:text-burgundy transition-colors duration-300">
+        <h3 className="text-base font-bold tracking-tight text-charcoal leading-snug">
           {category.name}
         </h3>
-        <p className="mt-1 text-xs text-charcoal/80 leading-relaxed max-w-[170px] line-clamp-2">
+        <p className="mt-1 text-xs text-charcoal/80 leading-relaxed">
           {category.description}
         </p>
       </div>

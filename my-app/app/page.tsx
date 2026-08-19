@@ -24,25 +24,25 @@ import { getEventTypeBySlug } from "@/lib/data/event-types";
 import { categories } from "@/lib/data/categories";
 import { venues } from "@/lib/data/venues";
 
-const FEATURED_VENUES = [...venues].sort((a, b) => b.rating - a.rating).slice(0, 7);
-const SPOTLIGHT_VENUE = FEATURED_VENUES[0];
-const STRIP_VENUES = FEATURED_VENUES.slice(1);
+const ALL_FEATURED = [...venues].sort((a, b) => b.rating - a.rating);
+const SPOTLIGHT_VENUE = ALL_FEATURED.find(v => v.venueType === "Banquet Hall" || v.venueType === "Convention Center") || ALL_FEATURED[0];
+const STRIP_VENUES = ALL_FEATURED.filter(v => v.id !== SPOTLIGHT_VENUE.id).slice(0, 6);
 
 const FEATURED_CATEGORIES = [
-  "wedding-planners",
-  "event-planners",
-  "decorators",
+  "invitation-designers",
+  "banner-designers",
   "caterers",
+  "event-planners",
+  "wedding-planners",
+  "photographers",
+  "decorators",
   "bakers",
   "specialty-food-vendors",
-  "photographers",
   "makeup-artists",
   "mehendi-artists",
   "djs",
   "bridal-wear",
   "groom-wear",
-  "invitation-designers",
-  "banner-designers",
   "gifts",
 ]
   .map((slug) => categories.find((c) => c.slug === slug))
@@ -98,7 +98,7 @@ export default function Home() {
               <span className="inline-flex items-center rounded-full bg-blush px-3 py-1 text-xs font-medium text-burgundy">
                 India&apos;s all-in-one event marketplace
               </span>
-              <h1 className="mt-5 font-heading text-4xl font-extrabold leading-[1.05] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
+              <h1 className="mt-5 font-heading text-4xl font-extrabold leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
                 Everything for your{" "}
                 <span className="text-rose">perfect event</span>, in one place.
               </h1>
@@ -108,11 +108,11 @@ export default function Home() {
                 back-and-forth.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                {["Weddings", "Birthdays", "Corporate", "College"].map((tag) => (
+                {["Family Functions", "Weddings", "Birthdays", "Corporate Events"].map((tag) => (
                   <Link
                     key={tag}
                     href="/events"
-                    className="group inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-charcoal transition-colors hover:border-rose hover:text-rose"
+                    className="group inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-charcoal transition-colors hover:border-rose hover:text-rose"
                   >
                     {tag}
                     <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
@@ -146,7 +146,7 @@ export default function Home() {
                 Find the Perfect Event Venue
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Top-rated marriage halls, banquet spaces, convention centers and more.
+                Top-rated banquet halls, party spaces, conference venues and convention centers.
               </p>
             </div>
             <Button

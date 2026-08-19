@@ -7,14 +7,14 @@ export const categories: ServiceCategory[] = [
     name: "Wedding Planners",
     group: "Planning",
     icon: "CalendarHeart",
-    description: "Plan your perfect wedding",
+    description: "Full-service wedding planning, timelines & vendor management",
   },
   {
     slug: "event-planners",
     name: "Event Planners",
     group: "Planning",
     icon: "CalendarCheck",
-    description: "Corporate, private & more",
+    description: "Planners for corporate seminars, birthdays & private parties",
   },
   // Decorators
   {
@@ -22,7 +22,7 @@ export const categories: ServiceCategory[] = [
     name: "Decorators",
     group: "Decorators",
     icon: "Sparkles",
-    description: "Creative themes & decor",
+    description: "Creative stage, floral, and backdrop themes for all occasions",
   },
   {
     slug: "stage-decorators",
@@ -51,21 +51,21 @@ export const categories: ServiceCategory[] = [
     name: "Caterers",
     group: "Food",
     icon: "ChefHat",
-    description: "Delicious menus for every taste",
+    description: "Multi-cuisine catering, customized buffet layouts & live counters",
   },
   {
     slug: "bakers",
     name: "Bakers",
     group: "Food",
     icon: "Cake",
-    description: "Custom cakes for occasions",
+    description: "Custom designed cakes, cupcakes & desserts for key milestones",
   },
   {
     slug: "specialty-food-vendors",
     name: "Specialty Food Vendors",
     group: "Food",
     icon: "UtensilsCrossed",
-    description: "Unique cuisines & live counters",
+    description: "Live chaat counters, mocktails, desserts & gourmet setups",
   },
   // Photography
   {
@@ -73,7 +73,7 @@ export const categories: ServiceCategory[] = [
     name: "Photographers",
     group: "Photography",
     icon: "Camera",
-    description: "Capture every special moment",
+    description: "Professional candid, portrait & traditional event coverage",
   },
   {
     slug: "videographers",
@@ -95,7 +95,7 @@ export const categories: ServiceCategory[] = [
     name: "DJs",
     group: "Entertainment",
     icon: "Disc3",
-    description: "DJ music for every party",
+    description: "Premium sound systems, party lights & professional event DJs",
   },
   {
     slug: "singers",
@@ -124,7 +124,7 @@ export const categories: ServiceCategory[] = [
     name: "Makeup Artists",
     group: "Beauty",
     icon: "Palette",
-    description: "Bridal & party makeup artists",
+    description: "Bridal, groom, and guest party makeover styling services",
   },
   {
     slug: "hair-stylists",
@@ -138,7 +138,7 @@ export const categories: ServiceCategory[] = [
     name: "Mehendi Artists",
     group: "Beauty",
     icon: "Hand",
-    description: "Intricate & bridal mehendi designs",
+    description: "Intricate traditional, Arabic, and custom henna designs",
   },
   // Design
   {
@@ -146,7 +146,7 @@ export const categories: ServiceCategory[] = [
     name: "Invitation Designers",
     group: "Design",
     icon: "Mail",
-    description: "Custom digital and print invitations",
+    description: "Digital invites, e-cards & premium printed wedding/party cards",
   },
   {
     slug: "presentation-designers",
@@ -160,7 +160,7 @@ export const categories: ServiceCategory[] = [
     name: "Banner Designers",
     group: "Design",
     icon: "Flag",
-    description: "Custom banners for every event",
+    description: "Flex banners, custom standees, and signage for events",
   },
   {
     slug: "poster-designers",
@@ -309,21 +309,35 @@ export const categories: ServiceCategory[] = [
     name: "Bridal Wear",
     group: "Beauty",
     icon: "Dress",
-    description: "Stunning lehengas & bridal wear",
+    description: "Premium bridal lehengas, silk sarees, and custom wedding gowns",
   },
   {
     slug: "groom-wear",
     name: "Groom Wear",
     group: "Beauty",
     icon: "Shirt",
-    description: "Sherwanis, suits & groom attire",
+    description: "Tailored sherwanis, bandhgalas, tuxedos, and wedding suits",
   },
   {
     slug: "gifts",
     name: "Gifts & Favors",
     group: "Planning",
     icon: "Gift",
-    description: "Curated event gifts & return favors",
+    description: "Curated guest return gifts, hampers & corporate giveaways",
+  },
+  {
+    slug: "vessels-chairs-rental",
+    name: "Vessels & Seating Rental",
+    group: "Equipment & Rental",
+    icon: "Armchair",
+    description: "Premium catering vessels, cooking utensils, and comfortable dining seating rentals.",
+  },
+  {
+    slug: "cabs-vans-rental",
+    name: "Travel & Event Logistics",
+    group: "Equipment & Rental",
+    icon: "Car",
+    description: "Passenger cabs, guest vans, and heavy logistics transport for event materials.",
   },
 ];
 
