@@ -16,17 +16,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/shared/search-bar";
 import { HeroCollage } from "@/components/shared/hero-collage";
-import { VenueCarousel } from "@/components/shared/venue-carousel";
-import { VenueSpotlight } from "@/components/shared/venue-spotlight";
 import { ServiceCategoryCard } from "@/components/shared/service-category-card";
 import { ServiceDiscoverySection } from "@/components/shared/service-discovery-section";
+import { UnifiedDiscoverySection } from "@/components/shared/unified-discovery-section";
 import { getEventTypeBySlug } from "@/lib/data/event-types";
 import { categories } from "@/lib/data/categories";
 import { venues } from "@/lib/data/venues";
-
-const ALL_FEATURED = [...venues].sort((a, b) => b.rating - a.rating);
-const SPOTLIGHT_VENUE = ALL_FEATURED.find(v => v.venueType === "Banquet Hall" || v.venueType === "Convention Center") || ALL_FEATURED[0];
-const STRIP_VENUES = ALL_FEATURED.filter(v => v.id !== SPOTLIGHT_VENUE.id).slice(0, 6);
+import { vendors } from "@/lib/data/vendors";
 
 const FEATURED_CATEGORIES = [
   "invitation-designers",
@@ -137,43 +133,8 @@ export default function Home() {
         featuredCategories={FEATURED_CATEGORIES}
       />
 
-      {/* Venue discovery */}
-      <section className="border-y border-border bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <h2 className="font-heading text-2xl font-bold text-charcoal sm:text-3xl">
-                Find the Perfect Event Venue
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Top-rated banquet halls, party spaces, conference venues and convention centers.
-              </p>
-            </div>
-            <Button
-              asChild
-              variant="outline"
-              className="hidden shrink-0 border-rose text-rose hover:bg-blush hover:text-burgundy sm:inline-flex"
-            >
-              <Link href="/venues">Explore Venues</Link>
-            </Button>
-          </div>
-
-          {SPOTLIGHT_VENUE && (
-            <div className="mt-6">
-              <VenueSpotlight venue={SPOTLIGHT_VENUE} />
-            </div>
-          )}
-
-          <VenueCarousel venues={STRIP_VENUES} />
-
-          <Button
-            asChild
-            className="mt-6 w-full bg-rose text-white hover:bg-burgundy sm:hidden"
-          >
-            <Link href="/venues">Explore Venues</Link>
-          </Button>
-        </div>
-      </section>
+      {/* Unified Discovery (Venues & Services) */}
+      <UnifiedDiscoverySection venues={venues} vendors={vendors} />
 
       {/* How it works */}
       <section id="how-it-works" className="bg-white">

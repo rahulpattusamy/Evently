@@ -119,39 +119,18 @@ export function Footer() {
 
         {/* Link grid */}
         <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-5">
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="inline-flex items-center -ml-6">
-              <Logo className="h-28" variant="default" />
-            </Link>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              Everything you need for your perfect event — discovered, compared and booked in one place.
-            </p>
-
-            <div className="mt-6 flex gap-2">
-              {SOCIAL_LINKS.map((s) => (
-                <Link
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full text-charcoal/60 transition-colors hover:bg-blush hover:text-rose"
-                >
-                  <s.icon className="h-4 w-4" />
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="md:col-span-1">
+          {/* Link columns (ordered first on mobile) */}
+          <div className="order-1 md:order-2 md:col-span-1">
             <LinkColumn title="Explore" links={EXPLORE_LINKS} />
           </div>
-          <div className="md:col-span-1">
+          <div className="order-2 md:order-3 md:col-span-1">
             <LinkColumn title="For Vendors" links={VENDOR_LINKS} />
           </div>
-          <div className="md:col-span-1">
+          <div className="order-3 md:order-4 md:col-span-1">
             <LinkColumn title="Company" links={COMPANY_LINKS} />
           </div>
           
-          <div className="md:col-span-1">
+          <div className="order-4 md:order-5 md:col-span-1">
             <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal">
               Contact
             </h4>
@@ -171,6 +150,29 @@ export function Footer() {
                 Chennai, India
               </li>
             </ul>
+          </div>
+
+          {/* Logo & description (placed last on mobile, first on desktop) */}
+          <div className="col-span-2 order-5 md:order-1 md:col-span-1 mt-6 md:mt-0 border-t border-border/40 pt-8 md:border-none md:pt-0 flex flex-col items-center md:items-start text-center md:text-left">
+            <Link href="/" className="inline-flex items-center md:-ml-6">
+              <Logo className="h-20 md:h-28" variant="default" />
+            </Link>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground mx-auto md:mx-0">
+              Everything you need for your perfect event — discovered, compared and booked in one place.
+            </p>
+
+            <div className="mt-6 flex gap-2 justify-center md:justify-start">
+              {SOCIAL_LINKS.map((s) => (
+                <Link
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-charcoal/60 transition-colors hover:bg-blush hover:text-rose"
+                >
+                  <s.icon className="h-4 w-4" />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 

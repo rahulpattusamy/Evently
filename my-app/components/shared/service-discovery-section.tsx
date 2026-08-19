@@ -65,7 +65,7 @@ export function ServiceDiscoverySection({
         {/* Explorer Area (Full Width) */}
         <div className="w-full">
           {/* Category Tabs */}
-          <div className="mb-10 flex overflow-x-auto pb-3 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0 gap-2 justify-start md:justify-center border-b border-border">
+          <div className="mb-10 grid grid-cols-3 gap-2 border-b border-border pb-4 md:flex md:flex-wrap md:justify-center md:pb-3">
             {TABS.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -74,14 +74,14 @@ export function ServiceDiscoverySection({
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={cn(
-                    "flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 whitespace-nowrap border cursor-pointer",
+                    "flex items-center justify-center gap-1.5 rounded-xl px-2 py-2.5 text-xs font-semibold transition-all duration-300 border cursor-pointer md:rounded-full md:px-5 md:py-2.5 md:text-sm",
                     isActive
                       ? "bg-rose border-rose text-white shadow-md shadow-rose/10"
                       : "bg-white border-border text-charcoal hover:border-rose/30 hover:bg-rose/[0.02]"
                   )}
                 >
-                  <Icon className={cn("h-4 w-4", isActive ? "text-white" : "text-rose")} />
-                  {tab.label}
+                  <Icon className={cn("h-3.5 w-3.5 shrink-0 md:h-4 md:w-4", isActive ? "text-white" : "text-rose")} />
+                  <span className="truncate">{tab.label}</span>
                 </button>
               );
             })}
