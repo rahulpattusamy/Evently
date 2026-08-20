@@ -154,8 +154,8 @@ export function Footer() {
 
           {/* Logo & description (placed last on mobile, first on desktop) */}
           <div className="col-span-2 order-5 md:order-1 md:col-span-1 mt-6 md:mt-0 border-t border-border/40 pt-8 md:border-none md:pt-0 flex flex-col items-center md:items-start text-center md:text-left">
-            <Link href="/" className="inline-flex items-center md:-ml-6">
-              <Logo className="h-20 md:h-28" variant="default" />
+            <Link href="/" className="inline-flex items-center md:-ml-2 md:-mt-4">
+              <Logo className="h-12 md:h-16" variant="default" />
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground mx-auto md:mx-0">
               Everything you need for your perfect event — discovered, compared and booked in one place.

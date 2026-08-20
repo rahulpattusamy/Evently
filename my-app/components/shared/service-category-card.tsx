@@ -6,7 +6,7 @@ import { ServiceCategory } from "@/lib/types";
 
 type IconName = keyof typeof Icons;
 
-function CategoryIcon({ name, ...props }: { name: string } & LucideProps) {
+export function CategoryIcon({ name, ...props }: { name: string } & LucideProps) {
   if (name === "Dress") {
     return (
       <svg
