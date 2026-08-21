@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { categories } from "@/lib/data/categories";
 import { CategoryIcon } from "@/components/shared/service-category-card";
@@ -32,6 +33,75 @@ import { Logo } from "@/components/shared/logo";
 import { toast } from "sonner";
 
 
+
+function getCategoryIconImage(slug: string): string {
+  switch (slug) {
+    case "wedding-planners":
+      return "/evently_service_icons/wedding-planners.png";
+    case "event-planners":
+    case "cabs-vans-rental":
+    case "event-equipment":
+    case "anchors-hosts":
+      return "/evently_service_icons/event-planners.png";
+    case "decorators":
+    case "stage-decorators":
+    case "backdrop-designers":
+    case "floral-decorators":
+    case "stages":
+    case "furniture-rentals":
+    case "lighting":
+      return "/evently_service_icons/decorators.png";
+    case "caterers":
+    case "chairs":
+    case "tables":
+    case "vessels-chairs-rental":
+      return "/evently_service_icons/caterers.png";
+    case "bakers":
+      return "/evently_service_icons/bakers.png";
+    case "specialty-food-vendors":
+      return "/evently_service_icons/specialty-food-vendors.png";
+    case "photographers":
+    case "videographers":
+    case "drone-photography":
+    case "projectors":
+    case "led-screens":
+      return "/evently_service_icons/photographers.png";
+    case "djs":
+    case "sound-systems":
+    case "singers":
+    case "dance-groups":
+      return "/evently_service_icons/djs.png";
+    case "makeup-artists":
+    case "hair-stylists":
+      return "/evently_service_icons/makeup-artists.png";
+    case "mehendi-artists":
+      return "/evently_service_icons/mehendi-artists.png";
+    case "bridal-wear":
+      return "/evently_service_icons/bridal-wear.png";
+    case "groom-wear":
+      return "/evently_service_icons/groom-wear.png";
+    case "gifts":
+      return "/evently_service_icons/gifts-favors.png";
+    case "banner-designers":
+    case "banner-printing":
+      return "/evently_service_icons/banner-designers.png";
+    case "invitation-designers":
+    case "presentation-designers":
+    case "poster-designers":
+    case "flyer-designers":
+    case "stage-backdrop-designers":
+    case "digital-creative-designers":
+    case "social-media-creative-designers":
+    case "invitation-printing":
+    case "poster-printing":
+    case "brochure-printing":
+    case "standee-printing":
+    case "certificate-printing":
+      return "/evently_service_icons/invitation-designers.png";
+    default:
+      return "/evently_service_icons/wedding-planners.png";
+  }
+}
 
 const NAV_LINKS = [
   { label: "Venues", href: "/venues" },
@@ -351,12 +421,11 @@ export function Navbar() {
               ? "flex-col sm:flex-row sm:items-start justify-between"
               : "flex-row items-center justify-between"
           )}>
-            {/* Categories wrapper */}
             <div className={cn(
               "flex items-center gap-x-4 lg:gap-x-5 transition-all duration-300",
               isExpanded
                 ? "flex-wrap gap-y-3"
-                : "flex-1 overflow-x-auto pb-1.5 sm:pb-0 sm:flex-wrap gap-y-3 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0"
+                : "flex-1 overflow-x-auto pb-1.5 sm:pb-0 flex-nowrap gap-y-3 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0"
             )}>
               <Link
                 href="/services"
@@ -396,8 +465,12 @@ export function Navbar() {
                       isExtra && !isExpanded && "sm:hidden"
                     )}
                   >
-                    <div className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-blush/30 text-rose group-hover:bg-rose group-hover:text-white transition-colors duration-300">
-                      <CategoryIcon name={category.icon} className="h-3.5 w-3.5" />
+                    <div className="relative h-10 w-10 shrink-0 flex items-center justify-center">
+                      <img
+                        src={getCategoryIconImage(category.slug)}
+                        alt={category.name}
+                        className="block h-full w-full object-contain object-center transition-transform duration-300 group-hover:scale-110"
+                      />
                     </div>
                     <span>{category.name}</span>
                   </Link>
