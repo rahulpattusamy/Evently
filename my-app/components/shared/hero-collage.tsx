@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 const FRAMES = [
   {
     className:
-      "absolute left-0 top-4 h-72 w-56 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
+      "absolute left-0 top-4 h-68 w-52 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
     src: "https://i.pinimg.com/736x/bb/b0/cd/bbb0cdfdf1548eb0a5ee16dcd79f52c0.jpg",
     alt: "Wedding ceremony",
     rot: "-6deg",
@@ -12,7 +12,7 @@ const FRAMES = [
   },
   {
     className:
-      "absolute right-0 top-0 h-64 w-52 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
+      "absolute right-0 top-0 h-60 w-48 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
     src: "https://i.pinimg.com/736x/f2/72/41/f2724122e0b52c33a3972024ce5b58ae.jpg",
     alt: "Birthday party",
     rot: "3deg",
@@ -20,7 +20,7 @@ const FRAMES = [
   },
   {
     className:
-      "absolute bottom-0 left-1/4 h-56 w-48 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
+      "absolute bottom-0 left-1/4 h-52 w-44 overflow-hidden rounded-2xl border-4 border-white shadow-xl",
     src: "https://i.pinimg.com/736x/a4/88/7c/a4887cb3a2d3954843211e38c7fa3a0b.jpg",
     alt: "Office event",
     rot: "2deg",
@@ -30,7 +30,7 @@ const FRAMES = [
 
 export function HeroCollage() {
   return (
-    <div className="relative mx-auto hidden h-[26rem] w-full max-w-md lg:block">
+    <div className="relative mx-auto hidden h-[25rem] w-full max-w-md lg:block">
       {FRAMES.map((frame) => (
         <div
           key={frame.src}

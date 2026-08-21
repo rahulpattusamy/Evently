@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { categories } from "@/lib/data/categories";
 import { CategoryIcon } from "@/components/shared/service-category-card";
-import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { useRouter, usePathname } from "next/navigation";
 import { SearchAutocomplete } from "@/components/search/search-autocomplete";
 import {
   Select,
@@ -39,7 +40,8 @@ const NAV_LINKS = [
 ];
 
 export function Navbar() {
-  const { isCompactSearchActive } = useStickySearch();
+  const pathname = usePathname();
+  const { isCompactSearchActive, setCompactSearchActive } = useStickySearch();
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
@@ -65,6 +67,27 @@ export function Navbar() {
     if (city) setSelectedCity(city);
   }, []);
 
+  useEffect(() => {
+    if (pathname !== "/") {
+      setCompactSearchActive(false);
+      return;
+    }
+
+    function handleScroll() {
+      const element = document.getElementById("services-section");
+      if (!element) return;
+      const rect = element.getBoundingClientRect();
+      setCompactSearchActive(rect.top <= 96);
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      setCompactSearchActive(false);
+    };
+  }, [pathname, setCompactSearchActive]);
+
   const bookingsCount = getBookingsByUser("user-1").length;
   const eventsCount = getUserEvents("user-1").length;
   const quotesCount = getQuotesByUser("user-1").length;
@@ -81,7 +104,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-border bg-white transition-transform duration-300 ${isCompactSearchActive ? "-translate-y-full pointer-events-none" : "translate-y-0"
+      className={`sticky top-0 z-50 border-b border-border bg-white transition-transform duration-300 ${isCompactSearchActive ? "-translate-y-24" : "translate-y-0"
         }`}
     >
       <div className="flex h-24 w-full items-center justify-between px-4 sm:px-6 lg:pl-4 lg:pr-10">
@@ -321,10 +344,29 @@ export function Navbar() {
 
       {/* Sub-Header: Service Quick Links */}
       <div className="border-t border-border/60 bg-warm-white">
-        <div className="w-full px-4 py-3 sm:px-6 lg:pl-4 lg:pr-10">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+        <div className="w-full px-4 py-2 sm:py-3 sm:px-6 lg:pl-4 lg:pr-10">
+          <div className={cn(
+            "flex gap-4",
+            isExpanded
+              ? "flex-col sm:flex-row sm:items-start justify-between"
+              : "flex-row items-center justify-between"
+          )}>
             {/* Categories wrapper */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 transition-all duration-300">
+            <div className={cn(
+              "flex items-center gap-x-4 lg:gap-x-5 transition-all duration-300",
+              isExpanded
+                ? "flex-wrap gap-y-3"
+                : "flex-1 overflow-x-auto pb-1.5 sm:pb-0 sm:flex-wrap gap-y-3 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0"
+            )}>
+              <Link
+                href="/services"
+                className="group flex shrink-0 items-center py-1 text-xs font-bold text-charcoal/90 transition-all duration-300 hover:-translate-y-0.5 hover:text-rose animate-in fade-in duration-200"
+              >
+                <span>All in One Place</span>
+              </Link>
+
+              <div className="h-4 w-px bg-border/80 shrink-0" />
+
               {[
                 "invitation-designers",
                 "banner-designers",
@@ -333,27 +375,26 @@ export function Navbar() {
                 "wedding-planners",
                 "photographers",
                 "decorators",
-
-                ...(isExpanded
-                  ? [
-                    "bakers",
-                    "specialty-food-vendors",
-                    "makeup-artists",
-                    "mehendi-artists",
-                    "djs",
-                    "bridal-wear",
-                    "groom-wear",
-                    "gifts",
-                  ]
-                  : []),
-              ].map((slug) => {
+                "bakers",
+                "specialty-food-vendors",
+                "makeup-artists",
+                "mehendi-artists",
+                "djs",
+                "bridal-wear",
+                "groom-wear",
+                "gifts",
+              ].map((slug, index) => {
+                const isExtra = index >= 7;
                 const category = categories.find((c) => c.slug === slug);
                 if (!category) return null;
                 return (
                   <Link
                     key={category.slug}
                     href={`/services?category=${category.slug}`}
-                    className="group flex shrink-0 items-center gap-2 py-1 text-[13px] font-semibold text-charcoal/80 transition-all duration-300 hover:-translate-y-0.5 hover:text-rose animate-in fade-in duration-200"
+                    className={cn(
+                      "group flex shrink-0 items-center gap-1.5 py-1 text-xs font-semibold text-charcoal/80 transition-all duration-300 hover:-translate-y-0.5 hover:text-rose animate-in fade-in duration-200",
+                      isExtra && !isExpanded && "sm:hidden"
+                    )}
                   >
                     <div className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-blush/30 text-rose group-hover:bg-rose group-hover:text-white transition-colors duration-300">
                       <CategoryIcon name={category.icon} className="h-3.5 w-3.5" />
@@ -367,7 +408,10 @@ export function Navbar() {
             {/* Toggle Button */}
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="flex items-center gap-1 text-[13px] font-bold text-rose hover:text-burgundy shrink-0 transition-colors self-end sm:self-start py-1 cursor-pointer select-none"
+              className={cn(
+                "hidden sm:flex items-center gap-1 text-xs font-bold text-rose hover:text-burgundy shrink-0 transition-colors py-1 cursor-pointer select-none",
+                isExpanded ? "self-end sm:self-start" : "self-center"
+              )}
             >
               {isExpanded ? "Show Less" : "More Services"}
               <ChevronDown

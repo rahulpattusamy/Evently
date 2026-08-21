@@ -40,7 +40,7 @@ export function ServiceDiscoverySection({
       : categories.filter((c) => c.group === activeTab);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-rose/[0.03] via-white to-white py-20 border-y border-border">
+    <section id="services-section" className="relative overflow-hidden bg-gradient-to-br from-rose/[0.03] via-white to-white py-20 border-y border-border">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Centered Heading */}
         <div className="text-center mb-12">

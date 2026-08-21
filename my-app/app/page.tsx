@@ -8,7 +8,6 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SearchBar } from "@/components/shared/search-bar";
 import { HeroCollage } from "@/components/shared/hero-collage";
 import { ServiceDiscoverySection } from "@/components/shared/service-discovery-section";
 import { UnifiedDiscoverySection } from "@/components/shared/unified-discovery-section";
@@ -81,17 +80,17 @@ export default function Home() {
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blush/50 via-warm-white/40 to-warm-white" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-warm-white via-warm-white/70 to-warm-white/40 lg:to-warm-white/30" />
-        <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 sm:pt-10 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 pt-6 pb-16 sm:px-6 sm:pt-10 sm:pb-24 lg:px-8 lg:pb-28">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
               <span className="inline-flex items-center rounded-full bg-blush px-3 py-1 text-xs font-medium text-burgundy">
                 India&apos;s all-in-one event marketplace
               </span>
-              <h1 className="mt-5 font-heading text-4xl font-extrabold leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
+              <h1 className="mt-4 font-heading text-3xl font-extrabold leading-[1.2] tracking-tight text-charcoal sm:text-4xl lg:text-5xl">
                 Everything for your{" "}
                 <span className="text-rose">perfect event</span>, in one place.
               </h1>
-              <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
+              <p className="mt-4 max-w-xl text-sm text-muted-foreground sm:text-base">
                 Discover venues, planners, caterers, photographers, decorators
                 and entertainers — compare, plan and book without the
                 back-and-forth.
@@ -111,11 +110,6 @@ export default function Home() {
             </div>
 
             <HeroCollage />
-          </div>
-
-          {/* Search card overlaps into the next section */}
-          <div className="relative z-10 mx-auto mt-10 max-w-4xl pb-10 sm:pb-14">
-            <SearchBar />
           </div>
         </div>
       </section>
