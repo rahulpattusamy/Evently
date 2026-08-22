@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -60,6 +61,10 @@
 }
 
 :root {
+  /* Fonts */
+  --font-inter: "Work Sans", "Work Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-jakarta: "Poppins", "Poppins Fallback", ui-sans-serif, system-ui, sans-serif;
+
   /* Evently palette — Myntra-inspired */
   --rose: #ff3f6c;
   --burgundy: #e1235b;

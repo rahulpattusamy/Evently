@@ -459,7 +459,7 @@ export function Navbar() {
                 return (
                   <Link
                     key={category.slug}
-                    href={`/services?category=${category.slug}`}
+                    href={`/services/${category.slug}`}
                     className={cn(
                       "group flex shrink-0 items-center gap-1.5 py-1 text-xs font-semibold text-charcoal/80 transition-all duration-300 hover:-translate-y-0.5 hover:text-rose animate-in fade-in duration-200",
                       isExtra && !isExpanded && "sm:hidden"
