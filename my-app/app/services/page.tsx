@@ -1,7 +1,6 @@
 import { filterVendors } from "@/lib/data/vendors";
 import { CitySlug, EventTypeSlug } from "@/lib/types";
 import { VendorCard } from "@/components/shared/vendor-card";
-import { ServiceFiltersBar } from "@/components/services/service-filters";
 import { Pagination } from "@/components/shared/pagination";
 import { EmptyState } from "@/components/shared/empty-state";
 import { VendorSort } from "@/lib/data/vendors";
@@ -43,11 +42,6 @@ export default async function ServicesPage({
           <p className="mt-1 text-sm text-muted-foreground">
             {results.length} vendors available across India
           </p>
-        </div>
-
-        {/* Horizontal filter bar */}
-        <div className="mb-8">
-          <ServiceFiltersBar />
         </div>
 
         {/* Grid */}

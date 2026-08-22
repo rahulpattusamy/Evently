@@ -3,7 +3,7 @@ import { categories, getCategoryBySlug } from "@/lib/data/categories";
 import { filterVendors, VendorSort } from "@/lib/data/vendors";
 import { CitySlug, EventTypeSlug } from "@/lib/types";
 import { VendorCard } from "@/components/shared/vendor-card";
-import { ServiceFiltersBar } from "@/components/services/service-filters";
+import { CategoryStickyHeader } from "@/components/services/service-filters";
 import { Pagination } from "@/components/shared/pagination";
 import { EmptyState } from "@/components/shared/empty-state";
 
@@ -30,7 +30,7 @@ export default async function ServiceCategoryPage({
   const sp = await searchParams;
   const get = (key: string) => (Array.isArray(sp[key]) ? sp[key][0] : sp[key]);
 
-  const results = filterVendors({
+  let results = filterVendors({
     categorySlug: cat.slug,
     city: get("city") as CitySlug | undefined,
     eventType: get("eventType") as EventTypeSlug | undefined,
@@ -40,28 +40,44 @@ export default async function ServiceCategoryPage({
     sort: (get("sort") as VendorSort) || "rating",
   });
 
+  // Client-side-safe text search on business name
+  const q = get("q")?.toLowerCase();
+  if (q) {
+    results = results.filter((v) =>
+      v.businessName.toLowerCase().includes(q) ||
+      v.tagline?.toLowerCase().includes(q)
+    );
+  }
+
   const page = Number(get("page") ?? "1");
   const totalPages = Math.max(1, Math.ceil(results.length / PAGE_SIZE));
   const pageResults = results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
+  // Stats for the sticky header
+  const verifiedCount = results.filter((v) => v.verified).length;
+  const avgRating = results.length
+    ? Math.round((results.reduce((s, v) => s + v.rating, 0) / results.length) * 10) / 10
+    : 0;
+  const avgPrice = results.length
+    ? Math.round(results.reduce((s, v) => s + v.startingPrice, 0) / results.length)
+    : 0;
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Sticky header with back arrow, icon, title, search & filters */}
+      <CategoryStickyHeader
+        categorySlug={cat.slug}
+        categoryName={cat.name}
+        categoryGroup={cat.group}
+        categoryDescription={cat.description}
+        resultCount={results.length}
+        verifiedCount={verifiedCount}
+        avgRating={avgRating}
+        avgPrice={avgPrice}
+      />
+
+      {/* Vendor grid */}
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-6">
-          <span className="text-xs font-semibold uppercase tracking-wider text-rose">{cat.group}</span>
-          <h1 className="mt-1 font-heading text-3xl font-extrabold text-charcoal">
-            {cat.name}
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">{cat.description}</p>
-        </div>
-
-        {/* Horizontal filter bar */}
-        <div className="mb-8">
-          <ServiceFiltersBar hideCategory />
-        </div>
-
-        {/* Grid */}
         {pageResults.length === 0 ? (
           <EmptyState
             title={`No ${cat.name.toLowerCase()} found`}
