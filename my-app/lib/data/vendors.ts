@@ -220,6 +220,8 @@ export function getVendorsByCategory(categorySlug: string) {
   return vendors.filter((v) => v.categorySlug === categorySlug);
 }
 
+export type VendorSort = "rating" | "price_asc" | "price_desc" | "reviews";
+
 export interface VendorFilters {
   city?: CitySlug;
   eventType?: EventTypeSlug;
@@ -228,10 +230,11 @@ export interface VendorFilters {
   maxPrice?: number;
   minRating?: number;
   verifiedOnly?: boolean;
+  sort?: VendorSort;
 }
 
 export function filterVendors(filters: VendorFilters): Vendor[] {
-  return vendors.filter((v) => {
+  let results = vendors.filter((v) => {
     if (filters.city && v.citySlug !== filters.city) return false;
     if (filters.eventType && !v.eventTypes.includes(filters.eventType)) return false;
     if (filters.categorySlug && v.categorySlug !== filters.categorySlug) return false;
@@ -240,4 +243,22 @@ export function filterVendors(filters: VendorFilters): Vendor[] {
     if (filters.verifiedOnly && !v.verified) return false;
     return true;
   });
+
+  switch (filters.sort) {
+    case "price_asc":
+      results = [...results].sort((a, b) => a.startingPrice - b.startingPrice);
+      break;
+    case "price_desc":
+      results = [...results].sort((a, b) => b.startingPrice - a.startingPrice);
+      break;
+    case "reviews":
+      results = [...results].sort((a, b) => b.reviewCount - a.reviewCount);
+      break;
+    case "rating":
+    default:
+      results = [...results].sort((a, b) => b.rating - a.rating);
+      break;
+  }
+
+  return results;
 }

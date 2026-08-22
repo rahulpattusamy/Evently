@@ -1,31 +1,10 @@
 "use client";
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useState } from "react";
-import { Filter, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-  SheetFooter,
-} from "@/components/ui/sheet";
 import { cities } from "@/lib/data/cities";
-import { eventTypes } from "@/lib/data/event-types";
-import { categories, categoryGroups } from "@/lib/data/categories";
 
 const PRICE_OPTIONS = [
-  { label: "Any Price", value: "" },
+  { label: "Any price", value: "" },
   { label: "Under ₹10,000", value: "10000" },
   { label: "Under ₹25,000", value: "25000" },
   { label: "Under ₹50,000", value: "50000" },
@@ -33,190 +12,138 @@ const PRICE_OPTIONS = [
 ];
 
 const RATING_OPTIONS = [
-  { label: "Any Rating", value: "" },
-  { label: "4.5 & above", value: "4.5" },
-  { label: "4.0 & above", value: "4.0" },
-  { label: "3.5 & above", value: "3.5" },
+  { label: "Any rating", value: "" },
+  { label: "4.5+ rating", value: "4.5" },
+  { label: "4.0+ rating", value: "4.0" },
+  { label: "3.5+ rating", value: "3.5" },
 ];
 
-function FilterFields({ hideCategory }: { hideCategory?: boolean }) {
+const SORT_OPTIONS = [
+  { label: "Top rated", value: "rating" },
+  { label: "Price: low to high", value: "price_asc" },
+  { label: "Price: high to low", value: "price_desc" },
+  { label: "Most reviewed", value: "reviews" },
+];
+
+interface FilterBarProps {
+  hideCategory?: boolean;
+}
+
+export function ServiceFiltersBar({ hideCategory }: FilterBarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  function set(key: string, value: string | boolean) {
+  function set(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
-    if (!value || value === "") {
+    if (!value) {
       params.delete(key);
     } else {
-      params.set(key, String(value));
+      params.set(key, value);
     }
     params.delete("page");
     router.push(`${pathname}?${params.toString()}`);
   }
 
   const city = searchParams.get("city") ?? "";
-  const eventType = searchParams.get("eventType") ?? "";
-  const categorySlug = searchParams.get("category") ?? "";
   const maxPrice = searchParams.get("maxPrice") ?? "";
   const minRating = searchParams.get("minRating") ?? "";
+  const sort = searchParams.get("sort") ?? "rating";
   const verified = searchParams.get("verified") === "true";
-  const available = searchParams.get("available") === "true";
+
+  const cityLabel = cities.find((c) => c.slug === city)?.name ?? "All cities";
+  const priceLabel = PRICE_OPTIONS.find((o) => o.value === maxPrice)?.label ?? "Any price";
+  const ratingLabel = RATING_OPTIONS.find((o) => o.value === minRating)?.label ?? "Any rating";
+  const sortLabel = SORT_OPTIONS.find((o) => o.value === sort)?.label ?? "Top rated";
 
   return (
-    <div className="space-y-5">
-      {!hideCategory && (
-        <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-charcoal">Category</label>
-          <Select value={categorySlug || "all"} onValueChange={(v) => set("category", v === "all" ? "" : v)}>
-            <SelectTrigger className="w-full"><SelectValue placeholder="All Categories" /></SelectTrigger>
-            <SelectContent className="max-h-72">
-              <SelectItem value="all">All Categories</SelectItem>
-              {categoryGroups.map((group) => (
-                <div key={group}>
-                  {categories
-                    .filter((c) => c.group === group)
-                    .map((c) => (
-                      <SelectItem key={c.slug} value={c.slug}>{c.name}</SelectItem>
-                    ))}
-                </div>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      )}
-
-      <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-charcoal">Event Type</label>
-        <Select value={eventType || "all"} onValueChange={(v) => set("eventType", v === "all" ? "" : v)}>
-          <SelectTrigger className="w-full"><SelectValue placeholder="All Events" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Events</SelectItem>
-            {eventTypes.map((e) => (
-              <SelectItem key={e.slug} value={e.slug}>{e.name}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+    <div className="flex flex-wrap items-center gap-2">
+      {/* City */}
+      <div className="relative">
+        <select
+          value={city}
+          onChange={(e) => set("city", e.target.value)}
+          className="appearance-none cursor-pointer rounded-full border border-border bg-white px-4 py-2 pr-8 text-sm font-semibold text-charcoal focus:outline-none focus:border-rose transition-colors hover:border-rose/40 shadow-sm"
+        >
+          <option value="">All cities</option>
+          {cities.map((c) => (
+            <option key={c.slug} value={c.slug}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+        <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-charcoal/40 text-xs">▾</span>
       </div>
 
-      <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-charcoal">Location</label>
-        <Select value={city || "all"} onValueChange={(v) => set("city", v === "all" ? "" : v)}>
-          <SelectTrigger className="w-full"><SelectValue placeholder="All Cities" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Cities</SelectItem>
-            {cities.map((c) => (
-              <SelectItem key={c.slug} value={c.slug}>{c.name}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      {/* Price */}
+      <div className="relative">
+        <select
+          value={maxPrice}
+          onChange={(e) => set("maxPrice", e.target.value)}
+          className="appearance-none cursor-pointer rounded-full border border-border bg-white px-4 py-2 pr-8 text-sm font-semibold text-charcoal focus:outline-none focus:border-rose transition-colors hover:border-rose/40 shadow-sm"
+        >
+          {PRICE_OPTIONS.map((o) => (
+            <option key={o.label} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-charcoal/40 text-xs">▾</span>
       </div>
 
-      <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-charcoal">Price</label>
-        <Select value={maxPrice || "any"} onValueChange={(v) => set("maxPrice", v === "any" ? "" : v)}>
-          <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
-          <SelectContent>
-            {PRICE_OPTIONS.map((o) => (
-              <SelectItem key={o.label} value={o.value || "any"}>{o.label}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      {/* Rating */}
+      <div className="relative">
+        <select
+          value={minRating}
+          onChange={(e) => set("minRating", e.target.value)}
+          className="appearance-none cursor-pointer rounded-full border border-border bg-white px-4 py-2 pr-8 text-sm font-semibold text-charcoal focus:outline-none focus:border-rose transition-colors hover:border-rose/40 shadow-sm"
+        >
+          {RATING_OPTIONS.map((o) => (
+            <option key={o.label} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-charcoal/40 text-xs">▾</span>
       </div>
 
-      <div className="space-y-1.5">
-        <label className="text-xs font-semibold text-charcoal">Rating</label>
-        <Select value={minRating || "any"} onValueChange={(v) => set("minRating", v === "any" ? "" : v)}>
-          <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
-          <SelectContent>
-            {RATING_OPTIONS.map((o) => (
-              <SelectItem key={o.label} value={o.value || "any"}>{o.label}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      {/* Verified toggle */}
+      <button
+        onClick={() => set("verified", verified ? "" : "true")}
+        className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+          verified
+            ? "border-rose bg-rose text-white"
+            : "border-white/20 bg-[#1a1a1a] text-white hover:border-white/40"
+        }`}
+      >
+        Verified only
+      </button>
 
-      <div className="space-y-3">
-        <label className="text-xs font-semibold text-charcoal">Availability</label>
-        <div className="flex items-center gap-2">
-          <Checkbox id="available" checked={available} onCheckedChange={(v) => set("available", !!v)} />
-          <label htmlFor="available" className="text-sm text-charcoal">Available on selected date</label>
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="verified" checked={verified} onCheckedChange={(v) => set("verified", !!v)} />
-          <label htmlFor="verified" className="text-sm text-charcoal">Verified Vendors Only</label>
-        </div>
+      {/* Sort — pushed to the right */}
+      <div className="relative ml-auto">
+        <select
+          value={sort}
+          onChange={(e) => set("sort", e.target.value)}
+          className="appearance-none cursor-pointer rounded-full border border-border bg-white px-4 py-2 pr-8 text-sm font-semibold text-charcoal focus:outline-none focus:border-rose transition-colors hover:border-rose/40 shadow-sm"
+        >
+          {SORT_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              Sort: {o.label}
+            </option>
+          ))}
+        </select>
+        <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-charcoal/40 text-xs">▾</span>
       </div>
     </div>
   );
 }
 
-export function ServiceFiltersDesktop({ hideCategory }: { hideCategory?: boolean }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const hasFilters = searchParams.toString().length > 0;
-
-  return (
-    <aside className="hidden w-64 shrink-0 lg:block">
-      <div className="sticky top-32 space-y-4 rounded-2xl border border-border bg-white p-5">
-        <div className="flex items-center justify-between">
-          <h3 className="flex items-center gap-1.5 font-heading text-sm font-bold text-charcoal">
-            <Filter className="h-4 w-4" /> Filters
-          </h3>
-          {hasFilters && (
-            <button
-              onClick={() => router.push(pathname)}
-              className="flex items-center gap-1 text-xs text-rose hover:text-burgundy"
-            >
-              <X className="h-3 w-3" /> Clear
-            </button>
-          )}
-        </div>
-        <FilterFields hideCategory={hideCategory} />
-      </div>
-    </aside>
-  );
+// Keep legacy exports so existing import sites don't break — they now render nothing on desktop
+// and are replaced by ServiceFiltersBar in the page layouts.
+export function ServiceFiltersDesktop(_props: { hideCategory?: boolean }) {
+  return null;
 }
 
-export function ServiceFiltersMobile({ hideCategory }: { hideCategory?: boolean }) {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
-
-  return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button variant="outline" className="gap-1.5 lg:hidden">
-          <Filter className="h-4 w-4" /> Filters
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="bottom" className="max-h-[85vh] overflow-y-auto rounded-t-2xl">
-        <SheetHeader>
-          <SheetTitle>Filters</SheetTitle>
-        </SheetHeader>
-        <div className="px-4 pb-4">
-          <FilterFields hideCategory={hideCategory} />
-        </div>
-        <SheetFooter className="flex-row gap-2">
-          <Button
-            variant="outline"
-            className="flex-1"
-            onClick={() => {
-              router.push(pathname);
-              setOpen(false);
-            }}
-          >
-            Clear All
-          </Button>
-          <Button
-            className="flex-1 bg-rose text-white hover:bg-burgundy"
-            onClick={() => setOpen(false)}
-          >
-            Show Results
-          </Button>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
-  );
+export function ServiceFiltersMobile(_props: { hideCategory?: boolean }) {
+  return null;
 }

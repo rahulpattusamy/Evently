@@ -20,7 +20,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <StickySearchProvider>
-      <Navbar />
+      {pathname === "/" && <Navbar />}
       <main className="flex-1 pb-16 md:pb-0">{children}</main>
       {pathname === "/" && <Footer />}
       <MobileBottomNav />
